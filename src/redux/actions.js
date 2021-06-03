@@ -6,3 +6,9 @@ export function addItem(payload){
     payload: payload
   }
 }
+
+export function removeItem(){
+  return {
+    type: actions.REMOVE_ITEM
+  }
+}
