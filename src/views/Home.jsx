@@ -1,31 +1,37 @@
 import { useEffect } from 'react';
-import { useSelector, useDispatch, connect } from 'react-redux';
-import { addItem, removeItem, addDeck, removeDeck } from '../redux/actions';
-import fetchDecks from '../redux/api/fetchDecks';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchDecks, selectAllDecks } from '../redux/slices/decksSlice';
 
 function Home() {
-  const somestate = useSelector(state => state.some);
-  const {decks} = useSelector(state => state.decks);
   const dispatch = useDispatch();
+  const decks = useSelector(selectAllDecks);
+  const deckStatus = useSelector(state => state.decks.status);
+  const errorMessage = useSelector(state => state.decks.error);
 
   useEffect(() => {
-    fetchDecks()(dispatch);
-  }, [dispatch]);
+    if(deckStatus === 'idle'){
+      dispatch(fetchDecks());
+    }
+  }, [dispatch, deckStatus]);
 
-  console.log(decks)
+  let content;
+
+  if(deckStatus === 'loading'){
+    content = <div className="loader">Loading...</div>
+  }
+  else if(deckStatus === 'succeeded'){
+    content = decks.map(item => 
+      <p key={item._id}>{item.name}</p>
+    );
+  }
+  else if(deckStatus === 'failed'){
+    content = <div>{errorMessage}</div>
+  }
+
 
   return (
     <div className="Home">
-      <button onClick={() => dispatch(addDeck({name: "new deck"}))}>Add item</button>
-      <button onClick={() => dispatch(removeDeck())}>Remove item</button>
-      {/* Home {somestate}
-      <button onClick={() => dispatch(addItem(4))}>Add item</button>
-      <button onClick={() => dispatch(removeItem())}>Remove item</button> */}
-      {
-        decks.map(item => 
-          <p key={item._id}>{item.name}</p>
-        )
-      }
+      {content}
     </div>
   );
 }

@@ -13,8 +13,8 @@ import Navbar from './components/Navbar';
 
 function App() {
   return (
-    <div className="App">
-      <Router>
+    <Router>
+      <div className="App">
         <Navbar/>
         <Switch>
           <Route path="/playing-cards">
@@ -26,12 +26,12 @@ function App() {
           <Route path="/tarot-cards">
             <TarotCards/>
           </Route>
-          <Route path="/">
+          <Route exact path="/">
             <Home/>
           </Route>
         </Switch>
-      </Router>
-    </div>
+      </div>
+    </Router>
   );
 }
 

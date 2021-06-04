@@ -1,18 +1,12 @@
-import { createStore } from 'redux';
-import rootReducer from './reducer';
+import { configureStore } from '@reduxjs/toolkit';
+import decksReducer from './slices/decksSlice';
+import vendorsReducer from './slices/vendorsSlice';
 
-const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
-
-// To use this: 
-
-// const unsubscribe = store.subscribe(() => {
-//   console.log("Store changed", store.getState());
-// });
-
-// import { addItem } from './actions';
-// store.dispatch(addItem("whatever"));
-
-// and in the destructor function of useEffect: 
-// unsubscribe();
+const store = configureStore({
+  reducer: {
+    decks: decksReducer,
+    vendors: vendorsReducer
+  }
+});
 
 export default store;
