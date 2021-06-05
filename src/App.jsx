@@ -10,12 +10,14 @@ import Home from './views/Home';
 
 // components
 import Navbar from './components/Navbar';
+import Sidebar from './components/Sidebar';
 
 function App() {
   return (
     <Router>
       <div className="App">
         <Navbar/>
+        <Sidebar/>
         <Switch>
           <Route path="/playing-cards">
             <PlayingCards/>

@@ -9,7 +9,7 @@
 .dropdown-item-static{
   display: block;
   width: 100%;
-  padding: .25rem 1.5rem;
+  padding: .25rem 1rem;
   clear: both;
   font-weight: 400;
   color: #212529;
@@ -113,19 +113,19 @@ animation: authScreenGradient 20s ease infinite; */
   display: block !important;
 }
 
-.sidebar{
-  /* max-width: 300px; */
-  min-width: 200px;
-}
+// .sidebar{
+//   /* max-width: 300px; */
+//   min-width: 200px;
+// }
 
-.sidebar-sticky{
-  top: 0;
-  height: calc(100vh - 64px);
-  padding-top: .5rem;
-  overflow-x: hidden;
-  /* overflow-y: auto; */
-  -ms-overflow-style: none;
-}
+// .sidebar-sticky{
+//   // top: 0;
+//   // height: calc(100vh - 64px);
+//   // padding-top: .5rem;
+//   // overflow-x: hidden;
+//   // /* overflow-y: auto; */
+//   // -ms-overflow-style: none;
+// }
 
 
 .main{
@@ -146,11 +146,9 @@ animation: authScreenGradient 20s ease infinite; */
   // box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 
-.navbar .navbar-brand{
-  /* max-width: 300px; */
-  /* min-width: 200px;
-  background-color:#ec2F4B; 
-  color: #000000; */
+.navbar{
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }
 
 /* .navbar .navbar-brand:hover{
@@ -187,9 +185,7 @@ animation: authScreenGradient 20s ease infinite; */
 }
 
 .sidebar .nav-link span.label{
-  font-size: 1rem;
-  line-height: 1.5em;
-  vertical-align: middle;
+  margin: 0 30px 0 10px;
 }
 
 .navbar-brand{
@@ -198,11 +194,11 @@ animation: authScreenGradient 20s ease infinite; */
 }
 
 .sidebar{
-  padding: 0;
+  max-width: 300px;
 }
 
 .sidebar-sticky{
-  padding-top: 1rem;
+  padding: 1rem 0;
 }
 
 .sidebar .nav-link{
@@ -216,20 +212,16 @@ animation: authScreenGradient 20s ease infinite; */
 
 
 
-.sidebar i.fa_left, .userPanel i.fa_left{
+.sidebar i.bi_left{
   margin-right: 30px;
   width: 20px;
   vertical-align: middle;
 }
 
-.sidebar i.fa_right, .userPanel i.fa_right{
-  margin-right: 0px;
-  /* font-size: 24px; */
-  /* vertical-align: middle; */
-  margin-top: 5px;
-  float: right;
-  /* width: 20px; */
-
+.sidebar i.bi_right{
+  margin-left: 30px;
+  width: 20px;
+  vertical-align: middle;
 }
 
 
