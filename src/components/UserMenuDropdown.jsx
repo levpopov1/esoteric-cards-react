@@ -9,35 +9,35 @@ function UserMenuDropdown() {
         <span className="label">user name</span>
       </button>
       <div id="userSettingsDropdown" className="dropdown-menu dropdown-menu-end" aria-labelledby="userSettings">
-        <a className="dropdown-item d-flex align-items-center" href="/users/id">
+        <NavLink className="dropdown-item d-flex align-items-center" to="/users/id">
           <i className="bi bi-person-badge-fill"></i>
           <span className="label">View Profile</span>
-        </a>
+        </NavLink>
         <div className="dropdown-divider"></div>
         <h6 className="dropdown-header">Admin panel</h6>
         <NavLink to="/users" className="dropdown-item d-flex align-items-center">
           <i className="bi bi-people-fill"></i>
           <span className="label">User list</span>
         </NavLink>
-        <a className="dropdown-item d-flex align-items-center" href="/admin/accesslog">
+        <NavLink className="dropdown-item d-flex align-items-center" to="/admin/accesslog">
           <i className="bi bi-unlock-fill"></i>
           <span className="label">Access log</span>
-        </a>
-        <a className="dropdown-item d-flex align-items-center" href="/admin/devblog">
+        </NavLink>
+        <NavLink className="dropdown-item d-flex align-items-center" to="/admin/devblog">
           <i className="bi bi-book-half"></i>
           <span className="label">Dev Blog</span>
-        </a>
-        <a className="dropdown-item d-flex align-items-center" href="/release-schedule" target="_blank">
+        </NavLink>
+        <NavLink className="dropdown-item d-flex align-items-center" to="/release-schedule" target="_blank">
           <i className="bi bi-github"></i>
           <span className="label">Release Schedule</span>
           <i className="bi bi-box-arrow-up-right ms-auto"></i>
-        </a>
+        </NavLink>
         <div className="dropdown-divider"></div>
         <h6 className="dropdown-header">Settings</h6>
-        <a className="dropdown-item d-flex align-items-center" href="/users/id/passwordchange">
+        <NavLink className="dropdown-item d-flex align-items-center" to="/users/id/passwordchange">
           <i className="bi bi-key-fill"></i>
           <span className="label">Change password</span>
-        </a>
+        </NavLink>
         <div className="dropdown-divider"></div>
         <h6 className="dropdown-header">Preferences</h6>
         <form>
@@ -75,10 +75,10 @@ function UserMenuDropdown() {
           </div>
         </form>
         <div className="dropdown-divider"></div>
-        <a className="dropdown-item d-flex align-items-center" href="/auth/logout">
+        <NavLink className="dropdown-item d-flex align-items-center" to="/auth/logout">
           <i className="bi bi-door-open-fill"></i>
           <span className="label">Log out</span>
-        </a>
+        </NavLink>
       </div>
     </li>
   )
