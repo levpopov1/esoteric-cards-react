@@ -1,12 +1,10 @@
 import { NavLink } from 'react-router-dom';
 import DropdownCard from './DropdownCard';
+import UserMenuDropdown from './UserMenuDropdown';
 
 function Navbar() {
-
-
-
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-white p-0 ">
+    <nav className="navbar navbar-expand-lg navbar-light bg-white">
       <NavLink to="/" className="navbar-brand">ESOTERIC CARDS</NavLink>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
@@ -14,7 +12,7 @@ function Navbar() {
       <div className="navbar-collapse collapse" id="navbarMain">
         <ul className="navbar-nav w-100">
           <li className="nav-item dropdown initial">
-            <button className="btn nav-link dropdown-toggle" id="playingCards" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button className="btn nav-link dropdown-toggle" id="playingCards" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Playing Cards
             </button>
             <div id="playingCardsDropdown" className="w-100 dropdown-menu m-0" aria-labelledby="playingCards">
@@ -26,7 +24,7 @@ function Navbar() {
             </div>
           </li>   
           <li className="nav-item dropdown initial">
-            <button className="btn nav-link dropdown-toggle" id="cardGames" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button className="btn nav-link dropdown-toggle" id="cardGames" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Card Games
             </button>
             <div id="cardGamesDropdown" className="w-100 dropdown-menu m-0" aria-labelledby="cardGames">
@@ -41,33 +39,32 @@ function Navbar() {
             <NavLink to="/tarot-cards" className="nav-link">Tarot Cards</NavLink>
           </li> 
           <div className="input-group flex-grow-1 w-auto" id="global-app-search">
-            <input className="form-control" type="text" value="" placeholder="Search..."/>
-            <div className="input-group-append">
-                <button className="btn " type="button" id="button-addon2">
-                    <i className="fas fa-search"></i>
-                </button>
-            </div>
+            <input className="form-control" type="text" id="search" placeholder="Search..."/>
+            <button className="btn btn-outline" type="button" id="button-addon2">
+                <i className="bi bi-search"></i>
+            </button>
           </div>
           <li className="nav-item">
-            <a className="nav-link" href="#" title="Favourite">
-              <i className="fas fa-star"></i>
-            </a>
+            <button className="btn nav-link" title="Favourite">
+              <i className="bi bi-star-fill"></i>
+            </button>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#" title="Refresh">
-              <i className="fas fa-sync"></i>
-            </a>
+            <button className="btn nav-link" title="Refresh">
+              <i className="bi bi-arrow-repeat"></i>
+            </button>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#" title="Notifications">
-              <i className="fas fa-bell"></i>
-            </a>
+            <button className="btn nav-link" title="Notifications">
+              <i className="bi bi-bell-fill"></i>
+            </button>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#" title="Settings">
-              <i className="fas fa-cog"></i>
-            </a>
+            <button className="btn nav-link" title="Settings">
+              <i className="bi bi-gear-fill"></i>
+            </button>
           </li>
+          <UserMenuDropdown/>
         </ul>
       </div>
     </nav>
