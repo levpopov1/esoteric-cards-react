@@ -1,21 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-
-const API_URL = 'http://localhost:5000/api/v1';
+import makeAPIRequest from '../makeAPIRequest';
 
 // Async Thunks
-export const fetchDecks = createAsyncThunk('decks/fetchDecks', async ()  => {
-  try {
-    const response = await fetch(API_URL + "/decks");
-    if(!response.ok){
-      throw new Error(`API request error. Status: ${response.status} - ${response.statusText}`);
-    }
-    const data = await response.json();
-    return data;
-  } 
-  catch (error) {
-    console.log(error);
-  }
-});
+export const fetchDecks = createAsyncThunk('decks/fetchDecks', async () => makeAPIRequest("/decks"));
 
 // Slice
 const decksSlice = createSlice({
