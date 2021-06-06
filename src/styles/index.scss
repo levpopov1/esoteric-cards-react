@@ -44,74 +44,69 @@
 }
 
 #authScreen{
-background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+  // background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+  background: linear-gradient(-45deg, #ec2f4b, #f03073, #e94099, #d856bc, #bd6cd9, #9880ef, #6791fb, #009fff);
   background-size: 200% 200%;
   background-position: 0% 50%;
   transition: all 1s ease;   
-/* -webkit-animation: authScreenGradient 20s ease infinite;
--moz-animation: authScreenGradient 20s ease infinite;
-animation: authScreenGradient 20s ease infinite; */
+  -webkit-animation: authScreenGradient 20s ease infinite;
+  -moz-animation: authScreenGradient 20s ease infinite;
+  animation: authScreenGradient 20s ease infinite; 
 }
 
 
 @-webkit-keyframes authScreenGradient {
-0% {
-      background-position: 0% 50%;
-}
-50% {
-      background-position: 100% 50%;
-}
-100% {
-      background-position: 0% 50%;
-}
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @-moz-keyframes authScreenGradient {
-0% {
-      background-position: 0% 50%;
-      
-}
-50% {
-      background-position: 100% 50%;
-      
-}
-100% {
-      background-position: 0% 50%;
-      
-}
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @keyframes authScreenGradient {
-0% {
-      background-position: 0% 50%;
-      
-}
-50% {
-      background-position: 100% 50%;
-      
-}
-100% {
-      background-position: 0% 50%;
-      
-}
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 
-/* .main-bg-color{
-  background-color: #8e07e5;
-  background-color: #6B2AD4;
-} */
+// .main-bg-color{
+//   background-color: #8e07e5;
+//   background-color: #6B2AD4;
+// }
 
 .main-bg-color-vertical{
   background: #009FFF;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to bottom, #ec2f4b, #f03073, #e94099, #d856bc, #bd6cd9, #9880ef, #6791fb, #009fff);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(180deg, #ec2f4b, #f03073, #e94099, #d856bc, #bd6cd9, #9880ef, #6791fb, #009fff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(0deg, #ec2f4b, #f03073, #e94099, #d856bc, #bd6cd9, #9880ef, #6791fb, #009fff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .main-bg-color-horizontal{
   background: #009FFF;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #ec2f4b, #f03073, #e94099, #d856bc, #bd6cd9, #9880ef, #6791fb, #009fff);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(90deg, #ec2f4b, #f03073, #e94099, #d856bc, #bd6cd9, #9880ef, #6791fb, #009fff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(270deg, #ec2f4b, #f03073, #e94099, #d856bc, #bd6cd9, #9880ef, #6791fb, #009fff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .secondary-bg-color{

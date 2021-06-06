@@ -2,7 +2,7 @@ import React from 'react'
 
 function Auth() {
   return (
-    <div>
+    <div id="authScreen">
       Auth Screen
     </div>
   )
