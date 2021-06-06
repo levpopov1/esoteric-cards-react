@@ -41,6 +41,8 @@ export const { addDeck, removeDeck } = decksSlice.actions;
 // Selectors
 export const selectAllDecks = (state) => state.decks.data;
 export const selectDeckById = (state, id) => state.decks.data.find(deck => deck.id === id);
+export const selectDeckByVendorName = (state, vendorName) => state.decks.data.filter(deck => deck.vendor === vendorName);
+export const selectDeckByCategoryName = (state, categoryName) => state.decks.data.filter(deck => deck.category === categoryName);
 
 // Reducers
 export default decksSlice.reducer;

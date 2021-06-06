@@ -10,7 +10,8 @@ const vendorsSlice = createSlice({
   initialState: {
     error: null,
     status: 'idle',
-    data: []
+    data: [],
+    currentVendor: {}
   },
   reducers: {
     addVendor: (state, action) => {
@@ -18,6 +19,9 @@ const vendorsSlice = createSlice({
     },
     removeVendor: (state, action) => {
       state.data.filter(vendor => vendor.id !== action.payload);
+    },
+    setCurrentVendor: (state, action) => {
+      state.currentVendor = state.data.find(vendor => vendor.slug === action.payload);
     }
   },
   extraReducers: {
@@ -36,11 +40,13 @@ const vendorsSlice = createSlice({
 });
 
 // Actions
-export const { addVendor, removeVendor } = vendorsSlice.actions;
+export const { addVendor, removeVendor, setCurrentVendor } = vendorsSlice.actions;
 
 // Selectors
 export const selectAllVendors = (state) => state.vendors.data;
 export const selectVendorById = (state, id) => state.vendors.data.find(vendor => vendor.id === id);
+export const selectPlayingCardVendors = (state) => state.vendors.data.filter(vendor => vendor.category === "Playing Cards");
+export const selectCardGameVendors = (state) => state.vendors.data.filter(vendor => vendor.category === "Card Games");
 
 // Reducers
 export default vendorsSlice.reducer;
