@@ -1,32 +1,30 @@
 import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchDecks, selectDeckByVendorName } from '../redux/slices/decksSlice';
-import { fetchVendors, setCurrentVendor} from '../redux/slices/vendorsSlice';
+import { fetchVendors, setCurrentVendor, selectAllVendors} from '../redux/slices/vendorsSlice';
 import Deck from '../components/Deck';
 
-function PlayingCards({match}) {
+function PlayingCards() {
 
+  const routeParams = useParams();
   const dispatch = useDispatch();
+  const vendors = useSelector(selectAllVendors);
   const currentVendor = useSelector(state => state.vendors.currentVendor);
   const decks = useSelector(state => selectDeckByVendorName(state, currentVendor.name));
-  const deckStatus = useSelector(state => state.decks.status);
-  const errorMessage = useSelector(state => state.decks.error);
-  const vendorStatus = useSelector(state => state.vendors.status);
+  // const deckStatus = useSelector(state => state.decks.status);
+  // const errorMessage = useSelector(state => state.decks.error);
+  // const vendorStatus = useSelector(state => state.vendors.status);
 
   useEffect(() => {
-    if(vendorStatus === 'idle'){
-      dispatch(fetchVendors());
-    }
-    if(deckStatus === 'idle'){
-      dispatch(fetchDecks());
-    }
-  }, [dispatch, deckStatus, vendorStatus]);
-
+    dispatch(fetchDecks());
+  }, [dispatch]);
+    
   useEffect(() => {
-    if(vendorStatus === 'succeeded'){
-      dispatch(setCurrentVendor(match.params.vendor));
+    if(vendors.length !== 0){
+      dispatch(setCurrentVendor(routeParams.vendor));
     }
-  }, [dispatch, vendorStatus, match.params.vendor]);
+  }, [dispatch, vendors, routeParams.vendor]);
 
   // let content;
 
