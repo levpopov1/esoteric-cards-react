@@ -3,35 +3,35 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchDecks, selectAllDecks } from '../redux/slices/decksSlice';
 
 function Home() {
-  const dispatch = useDispatch();
-  const decks = useSelector(selectAllDecks);
-  const deckStatus = useSelector(state => state.decks.status);
-  const errorMessage = useSelector(state => state.decks.error);
+  // const dispatch = useDispatch();
+  // const decks = useSelector(selectAllDecks);
+  // const deckStatus = useSelector(state => state.decks.status);
+  // const errorMessage = useSelector(state => state.decks.error);
 
-  useEffect(() => {
-    if(deckStatus === 'idle'){
-      dispatch(fetchDecks());
-    }
-  }, [dispatch, deckStatus]);
+  // useEffect(() => {
+  //   if(deckStatus === 'idle'){
+  //     dispatch(fetchDecks());
+  //   }
+  // }, [dispatch, deckStatus]);
 
-  let content;
+  // let content;
 
-  if(deckStatus === 'loading'){
-    content = <div className="loader">Loading...</div>
-  }
-  else if(deckStatus === 'succeeded'){
-    content = decks.map(item => 
-      <p key={item._id}>{item.name}</p>
-    );
-  }
-  else if(deckStatus === 'failed'){
-    content = <div>{errorMessage}</div>
-  }
+  // if(deckStatus === 'loading'){
+  //   content = <div className="loader">Loading...</div>
+  // }
+  // else if(deckStatus === 'succeeded'){
+  //   content = decks.map(item => 
+  //     <p key={item._id}>{item.name}</p>
+  //   );
+  // }
+  // else if(deckStatus === 'failed'){
+  //   content = <div>{errorMessage}</div>
+  // }
 
 
   return (
     <div className="main">
-      {content}
+      <h1 className="title">Homepage</h1>
     </div>
   );
 }
