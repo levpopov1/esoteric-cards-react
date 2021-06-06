@@ -22,12 +22,24 @@ function App() {
         <div className="grid-container">
           <Sidebar/>
           <Switch>
-            <Route path="/playing-cards/:vendor" component={PlayingCards}></Route>
-            <Route path="/card-games/:vendor" component={CardGames}></Route>
-            <Route path="/tarot-cards" component={TarotCards}></Route>
-            <Route path="/auth" component={Auth}></Route>
-            <Route exact path="/" component={Home}></Route>
-            <Route component={NotFound}></Route>
+            <Route path="/playing-cards/:vendor">
+              <PlayingCards/>
+            </Route>
+            <Route path="/card-games/:vendor">
+              <CardGames/>
+            </Route>
+            <Route path="/tarot-cards">
+              <TarotCards/>
+            </Route>
+            <Route path="/auth">
+              <Auth/>
+            </Route>
+            <Route exact path="/">
+              <Home/>
+            </Route>
+            <Route>
+              <NotFound/>
+            </Route>
           </Switch>
         </div>
       </div>
