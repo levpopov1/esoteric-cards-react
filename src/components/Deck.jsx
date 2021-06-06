@@ -6,7 +6,9 @@ function Deck({deck}) {
     <div className="card">
       <img src={deck.img} className="card-img-top" alt=""/>
       <div className="card-body">
-        {deck.name}
+        <h5 className="card-title">
+          {deck.name}
+        </h5>
       </div>
     </div>
   </div>

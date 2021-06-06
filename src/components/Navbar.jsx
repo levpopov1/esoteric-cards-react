@@ -30,7 +30,7 @@ function Navbar() {
             <button className="btn nav-link dropdown-toggle" id="playingCards" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Playing Cards
             </button>
-            <div id="playingCardsDropdown" className="w-100 dropdown-menu m-0" aria-labelledby="playingCards">
+            <div id="playingCardsDropdown" className="fullwidth-dropdown w-100 dropdown-menu m-0" aria-labelledby="playingCards">
               <div className="container-fluid d-block">
                 <div className="row">
                   {playingCardVendors.map(vendor => <DropdownCard key={vendor._id} vendor={vendor} category={{name: "Playing Cards", slug: "playing-cards"}}/>)}
@@ -42,7 +42,7 @@ function Navbar() {
             <button className="btn nav-link dropdown-toggle" id="cardGames" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Card Games
             </button>
-            <div id="cardGamesDropdown" className="w-100 dropdown-menu m-0" aria-labelledby="cardGames">
+            <div id="cardGamesDropdown" className="fullwidth-dropdown w-100 dropdown-menu m-0" aria-labelledby="cardGames">
               <div className="container-fluid d-block">
                 <div className="row">
                   {cardGamedVendors.map(vendor => <DropdownCard key={vendor._id} vendor={vendor} category={{name: "Card Games", slug: "card-games"}}/>)}
@@ -51,7 +51,7 @@ function Navbar() {
             </div>
           </li>  
           <li className="nav-item">
-            <NavLink to="/tarot-cards" className="nav-link">Tarot Cards</NavLink>
+            <NavLink to="/tarot-cards" className="btn nav-link">Tarot Cards</NavLink>
           </li> 
           <div className="input-group flex-grow-1 w-auto" id="global-app-search">
             <input className="form-control" type="text" id="search" placeholder="Search..."/>
