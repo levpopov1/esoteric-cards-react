@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchVendors } from '../redux/slices/vendorsSlice';
+import { fetchVendors, selectPlayingCardVendors, selectCardGameVendors } from '../redux/slices/vendorsSlice';
 import { NavLink } from 'react-router-dom';
 import DropdownCard from './DropdownCard';
 import UserMenuDropdown from './UserMenuDropdown';
@@ -9,8 +9,8 @@ function Navbar() {
 
   const dispatch = useDispatch();
   const vendorStatus = useSelector(state => state.vendors.status);
-  const playingCardVendors = useSelector(state => state.vendors.data.filter(vendor => vendor.category === "Playing Cards"));
-  const cardGamedVendors = useSelector(state => state.vendors.data.filter(vendor => vendor.category === "Card Games"));
+  const playingCardVendors = useSelector(selectPlayingCardVendors);
+  const cardGamedVendors = useSelector(selectCardGameVendors);
 
   useEffect(() => {
     if(vendorStatus === 'idle'){
