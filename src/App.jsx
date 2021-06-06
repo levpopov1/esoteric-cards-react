@@ -3,10 +3,10 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 // Views
+import Home from './views/Home';
 import PlayingCards from './views/PlayingCards';
 import CardGames from './views/CardGames';
 import TarotCards from './views/TarotCards';
-import Home from './views/Home';
 import Auth from './views/Auth';
 import NotFound from './views/NotFound';
 
@@ -22,22 +22,12 @@ function App() {
         <div className="grid-container">
           <Sidebar/>
           <Switch>
-            <Route path="/playing-cards">
-              <PlayingCards/>
-            </Route>
-            <Route path="/card-games">
-              <CardGames/>
-            </Route>
-            <Route path="/tarot-cards">
-              <TarotCards/>
-            </Route>
-            <Route path="/auth">
-              <Auth/>
-            </Route>
-            <Route exact path="/">
-              <Home/>
-            </Route>
-            <Route component={NotFound} />
+            <Route path="/playing-cards/:vendor" component={PlayingCards}></Route>
+            <Route path="/card-games/:vendor" component={CardGames}></Route>
+            <Route path="/tarot-cards" component={TarotCards}></Route>
+            <Route path="/auth" component={Auth}></Route>
+            <Route exact path="/" component={Home}></Route>
+            <Route component={NotFound}></Route>
           </Switch>
         </div>
       </div>
