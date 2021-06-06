@@ -1,8 +1,23 @@
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchVendors } from '../redux/slices/vendorsSlice';
 import { NavLink } from 'react-router-dom';
 import DropdownCard from './DropdownCard';
 import UserMenuDropdown from './UserMenuDropdown';
 
 function Navbar() {
+
+  const dispatch = useDispatch();
+  const vendorStatus = useSelector(state => state.vendors.status);
+  const playingCardVendors = useSelector(state => state.vendors.data.filter(vendor => vendor.category === "Playing Cards"));
+  const cardGamedVendors = useSelector(state => state.vendors.data.filter(vendor => vendor.category === "Card Games"));
+
+  useEffect(() => {
+    if(vendorStatus === 'idle'){
+      dispatch(fetchVendors());
+    }
+  }, [dispatch, vendorStatus]);
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white">
       <NavLink to="/" className="navbar-brand">ESOTERIC CARDS</NavLink>
@@ -18,7 +33,7 @@ function Navbar() {
             <div id="playingCardsDropdown" className="w-100 dropdown-menu m-0" aria-labelledby="playingCards">
               <div className="container-fluid d-block">
                 <div className="row">
-                  <DropdownCard />
+                  {playingCardVendors.map(vendor => <DropdownCard key={vendor._id} vendor={vendor} category={{name: "Playing Cards", slug: "playing-cards"}}/>)}
                 </div>
               </div>
             </div>
@@ -30,7 +45,7 @@ function Navbar() {
             <div id="cardGamesDropdown" className="w-100 dropdown-menu m-0" aria-labelledby="cardGames">
               <div className="container-fluid d-block">
                 <div className="row">
-                  <DropdownCard />
+                  {cardGamedVendors.map(vendor => <DropdownCard key={vendor._id} vendor={vendor} category={{name: "Card Games", slug: "card-games"}}/>)}
                 </div>
               </div>
             </div>

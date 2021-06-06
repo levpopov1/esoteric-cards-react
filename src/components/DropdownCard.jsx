@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 
-function DropdownCard() {
+function DropdownCard({vendor, category}) {
   return(
     <div className="col-sm-2 my-3">
       <div className="card">
@@ -10,8 +10,8 @@ function DropdownCard() {
           </p>
         </div>
         <div className="card-footer text-center">
-          <NavLink to="slug" className="card-link stretched-link">
-            item name
+          <NavLink to={"/" + category.slug + "/" + vendor.slug} className="card-link stretched-link">
+            {vendor.name}
           </NavLink>
         </div>
       </div>
