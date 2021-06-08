@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link, useParams, useLocation, useRouteMatch} from "react-router-dom";
 
 function Card({card}) {
 

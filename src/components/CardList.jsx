@@ -19,10 +19,8 @@ function CardList() {
   }, [storeDeck]);
 
   return (
-    <div className="container-fluid">
-      <div className="row">
-        {currentDeck.cards.map(card => <Card key={card.card_id} card={card}/>)}
-      </div>
+    <div className="row">
+      {currentDeck.cards.map(card => <Card key={card.card_id} card={card}/>)}
     </div>
   );
 }
