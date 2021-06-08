@@ -1,23 +1,17 @@
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchVendors, selectPlayingCardVendors, selectCardGameVendors } from '../redux/slices/vendorsSlice';
-import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Link, NavLink } from 'react-router-dom';
+import { selectPlayingCardVendors, selectCardGameVendors } from '../redux/slices/vendorsSlice';
 import DropdownCard from './DropdownCard';
 import UserMenuDropdown from './UserMenuDropdown';
 
 function Navbar() {
 
-  const dispatch = useDispatch();
-  const vendorStatus = useSelector(state => state.vendors.status);
   const playingCardVendors = useSelector(selectPlayingCardVendors);
   const cardGamedVendors = useSelector(selectCardGameVendors);
 
-  useEffect(() => {
-    if(vendorStatus === 'idle'){
-      dispatch(fetchVendors());
-    }
-  }, [dispatch, vendorStatus]);
-
+  const playingcardsTop5 = playingCardVendors.slice(0, 5).map(vendor => <DropdownCard key={vendor._id} vendor={vendor} category={{name: "Playing Cards", slug: "playing-cards"}}/>);
+  const cardGamesTop5 = cardGamedVendors.slice(0,5).map(vendor => <DropdownCard key={vendor._id} vendor={vendor} category={{name: "Card Games", slug: "card-games"}}/>);
+  
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white">
       <NavLink to="/" className="navbar-brand">ESOTERIC CARDS</NavLink>
@@ -33,7 +27,17 @@ function Navbar() {
             <div id="playingCardsDropdown" className="fullwidth-dropdown w-100 dropdown-menu m-0" aria-labelledby="playingCards">
               <div className="container-fluid d-block">
                 <div className="row">
-                  {playingCardVendors.map(vendor => <DropdownCard key={vendor._id} vendor={vendor} category={{name: "Playing Cards", slug: "playing-cards"}}/>)}
+                  {/* {playingCardVendors.map(vendor => <DropdownCard key={vendor._id} vendor={vendor} category={{name: "Playing Cards", slug: "playing-cards"}}/>)} */}
+                  {playingcardsTop5}
+                  <div className="col-sm-2 my-3">
+                    <div className="card">
+                      <div className="card-body">
+                        <Link to="/playing-cards" className="card-link stretched-link">
+                          All Playing Cards
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -45,7 +49,8 @@ function Navbar() {
             <div id="cardGamesDropdown" className="fullwidth-dropdown w-100 dropdown-menu m-0" aria-labelledby="cardGames">
               <div className="container-fluid d-block">
                 <div className="row">
-                  {cardGamedVendors.map(vendor => <DropdownCard key={vendor._id} vendor={vendor} category={{name: "Card Games", slug: "card-games"}}/>)}
+                  {/* {cardGamedVendors.slice(0, 4).map(vendor => <DropdownCard key={vendor._id} vendor={vendor} category={{name: "Card Games", slug: "card-games"}}/>)} */}
+                  {cardGamesTop5}
                 </div>
               </div>
             </div>
