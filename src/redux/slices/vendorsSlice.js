@@ -47,6 +47,7 @@ export const selectAllVendors = (state) => state.vendors.data;
 export const selectVendorById = (state, id) => state.vendors.data.find(vendor => vendor.id === id);
 export const selectPlayingCardVendors = (state) => state.vendors.data.filter(vendor => vendor.category === "Playing Cards");
 export const selectCardGameVendors = (state) => state.vendors.data.filter(vendor => vendor.category === "Card Games");
+export const selectTarotCardVendors = (state) => state.vendors.data.filter(vendor => vendor.category === "Tarot Cards");
 
 // Reducers
 export default vendorsSlice.reducer;
