@@ -25,10 +25,13 @@ function DeckList() {
   let sideEffects;
 
   if(status === 'loading'){
-    sideEffects = <div className="loader">Loading...</div>
+    sideEffects = <div className="loader text-center p-3">Loading...</div>
   }
   else if(status === 'failed'){
     sideEffects = <div>{error}</div>
+  }
+  else if(status === 'succeeded' && decks.length === 0){
+    sideEffects = <div className="text-center p-3">No decks from this vendor.</div>
   }
 
   return (
