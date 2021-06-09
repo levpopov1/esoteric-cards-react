@@ -9,6 +9,8 @@ function CardList() {
   const [currentDeck, setCurrentDeck] = useState({
     cards: []
   });
+
+  const [showCardBack, setShowCardBack] = useState(false);
   
   const storeDeck = useSelector(state => state.decks.data.find(deck => deck.vendor_slug === params.vendor && deck.slug === params.deck));
   const error = useSelector(state => state.decks.error);
@@ -35,7 +37,15 @@ function CardList() {
   return (
     <div className="row">
       {sideEffects}
-      {currentDeck.cards.map(card => <Card key={card.card_id} card={card}/>)}
+      <div className="col-sm-12">
+        <div className="d-flex flex-row justify-content-between align-items-center">
+          <h1 className="display-5 my-3">{currentDeck.vendor} / {currentDeck.name}</h1>
+          <button className="btn btn-primary" onClick={() => setShowCardBack(prev => !prev)}>
+            Flip All
+          </button>
+        </div>
+      </div>
+      {currentDeck.cards.map(card => <Card key={card.card_id} card={card} showCardBack={showCardBack}/>)}
     </div>
   );
 }
