@@ -30,22 +30,27 @@ function CardList() {
   else if(status === 'failed'){
     sideEffects = <div>{error}</div>
   }
-  else if(status === 'succeeded' && currentDeck.cards.length === 0){
+  else if(status === 'succeeded' && storeDeck.cards.length === 0){
     sideEffects = <div className="text-center p-3">No cards in this deck.</div>
   }
 
   return (
     <div className="row">
       {sideEffects}
-      <div className="col-sm-12">
-        <div className="d-flex flex-row justify-content-between align-items-center">
-          <h1 className="display-5 my-3">{currentDeck.vendor} / {currentDeck.name}</h1>
-          <button className="btn btn-primary" onClick={() => setShowCardBack(prev => !prev)}>
-            Flip All
-          </button>
+      {
+        status === 'succeeded' && currentDeck.name &&
+        <div className="col-sm-12">
+          <div className="d-flex flex-row justify-content-between align-items-center">
+            <h1 className="display-5 my-3">{currentDeck.vendor + " | " + currentDeck.name}</h1>
+            <button className="btn btn-primary" onClick={() => setShowCardBack(prev => !prev)}>
+              Flip All
+            </button>
+          </div>
         </div>
-      </div>
-      {currentDeck.cards.map(card => <Card key={card.card_id} card={card} showCardBack={showCardBack}/>)}
+      }
+      {
+        currentDeck.cards.map(card => <Card key={card.card_id} card={card} showCardBack={showCardBack}/>)
+      }
     </div>
   );
 }
