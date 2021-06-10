@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 function Sidebar() {
   return (
-    <nav className="sidebar main-bg-color-vertical">
-      <div className="sidebar-sticky">
+    <nav className="sidebar">
+      <div className="sidebar-sticky main-bg-color-vertical">
         <ul className="nav flex-column">
           <p className="sidebar-navblock-header">
             Section Header
