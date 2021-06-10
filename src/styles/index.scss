@@ -14,6 +14,17 @@
   grid-area: main;
 }
 
+@media (max-width: 992px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "main"
+   }
+   .sidebar{
+    display: none;
+  }
+}
+
 .fullwidth-dropdown{
   border: none;
   border-top: 1px solid rgba(0, 0, 0, 0.15);
@@ -108,8 +119,8 @@
 }
 
 .navbar{
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  // padding-left: 0.5rem;
+  // padding-right: 0.5rem;
   box-shadow: 0 0 35px 0 rgba(154,161,171,.15);
   // box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
@@ -156,7 +167,8 @@
 }
 
 .sidebar-sticky{
-  height: calc(100vh - 58px);
+  // height: calc(100vh - 58px);
+  height: 100vh;
   padding-top: 1rem;
   padding-bottom: 1rem;
   overflow-x: hidden;
@@ -180,9 +192,9 @@
   position: initial;
 }
 
-#global-app-search{
-  margin: 0 2rem;
-}
+// #global-app-search{
+//   margin: 0 2rem;
+// }
 
 
 /* The switch - the box around the slider */
