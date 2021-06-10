@@ -29,10 +29,10 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Navbar/>
         <div className="grid-container">
           <Sidebar/>
           <div className="main">
+        <Navbar/>
             <div className="container-fluid">
               <Switch>
                 <Route path="/playing-cards/:vendor/:deck">

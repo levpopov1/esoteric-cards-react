@@ -1,6 +1,8 @@
+@import './bs-extensions.scss';
+
 .grid-container {
   display: grid;
-  grid-template-columns: 300px 1fr;
+  grid-template-columns: 260px 1fr;
   grid-template-rows: 1fr;
   gap: 0px 0px;
   grid-template-areas: "sidebar main"
@@ -23,6 +25,21 @@
    .sidebar{
     display: none;
   }
+}
+
+input{
+  min-width: 300px !important;
+}
+
+.logo{
+  display: block;
+  color: white;
+  padding: 12px 24px;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 1.45rem;
+  text-decoration: none;
+  white-space: nowrap;
 }
 
 .fullwidth-dropdown{
@@ -142,17 +159,30 @@
   color: #ffffff;
 }
 
+.sidebar .nav-item{
+  margin: 0 8px;
+}
+
 .sidebar .nav-link{
   color: #ffffff;
   font-weight: normal;
   font-size: 1rem;
   line-height: 1.5em;
-  padding: 12px 24px;
+  padding: 12px 16px;
+  text-decoration: none;
+  border-radius: 8px;
+
 }
 
 .sidebar .nav-link:hover{
-  text-decoration: none;
-  background-color: rgba(0, 0, 0, 0.08);
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.sidebar .nav-link.active{
+  // background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(255,255,255, 1);
+  color: #111;
+  box-shadow: 0 4px 16px 2px rgba(0, 0, 0, 0.15);
 }
 
 .sidebar .nav-link span.label{
@@ -161,6 +191,7 @@
 
 .sidebar-navblock-header{
   margin-left: 24px;
+  margin-bottom: 8px;
   color: #ffffff;
   color: rgba(255, 255, 255, 0.6);
   font-weight: bold;
@@ -169,8 +200,8 @@
 .sidebar-sticky{
   // height: calc(100vh - 58px);
   height: 100vh;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  // padding-top: 1rem;
+  // padding-bottom: 1rem;
   overflow-x: hidden;
   position: sticky;
   top: 0;

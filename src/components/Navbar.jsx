@@ -15,12 +15,12 @@ function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white">
       <div className="container-fluid">
-        <NavLink to="/" className="navbar-brand">ESOTERIC CARDS</NavLink>
+        {/* <NavLink to="/" className="navbar-brand">ESOTERIC CARDS</NavLink> */}
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarMain">
-          <ul className="navbar-nav me-auto">
+          {/* <ul className="navbar-nav me-auto">
             <li className="nav-item dropdown initial">
               <button className="btn nav-link dropdown-toggle" id="playingCards" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Playing Cards
@@ -28,7 +28,6 @@ function Navbar() {
               <div id="playingCardsDropdown" className="fullwidth-dropdown w-100 dropdown-menu m-0" aria-labelledby="playingCards">
                 <div className="container-fluid d-block">
                   <div className="row">
-                    {/* {playingCardVendors.map(vendor => <DropdownCard key={vendor._id} vendor={vendor} category={{name: "Playing Cards", slug: "playing-cards"}}/>)} */}
                     {playingcardsTop5}
                     <div className="col-sm-2 my-3">
                       <div className="card">
@@ -50,7 +49,6 @@ function Navbar() {
               <div id="cardGamesDropdown" className="fullwidth-dropdown w-100 dropdown-menu m-0" aria-labelledby="cardGames">
                 <div className="container-fluid d-block">
                   <div className="row">
-                    {/* {cardGamedVendors.slice(0, 4).map(vendor => <DropdownCard key={vendor._id} vendor={vendor} category={{name: "Card Games", slug: "card-games"}}/>)} */}
                     {cardGamesTop5}
                   </div>
                 </div>
@@ -59,8 +57,12 @@ function Navbar() {
             <li className="nav-item">
               <NavLink to="/tarot-cards" className="btn nav-link">Tarot Cards</NavLink>
             </li> 
-          </ul>
-          <div className="m-auto">
+          </ul> */}
+          <div className="d-flex flex-row align-items-center">
+            <button className="btn btn-outline-light-gray  me-3" type="button" id="sidebar-toggler">
+              {/* <i className="bi bi-arrow-bar-left"></i> */}
+              <i className="bi bi-list"></i>
+            </button>
             <div className="input-group" id="global-app-search">
               <input className="form-control" type="text" id="search" placeholder="Search..."/>
               <button className="btn btn-outline" type="button" id="button-addon2">
