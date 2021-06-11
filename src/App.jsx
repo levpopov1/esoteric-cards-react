@@ -6,16 +6,16 @@ import { fetchDecks } from './redux/slices/decksSlice';
 
 // Views
 import Home from './views/Home';
-import CardGames from './views/CardGames';
-import TarotCards from './views/TarotCards';
+import DecksView from './views/DecksView';
+import CardsView from './views/CardsView';
 import Auth from './views/Auth';
 import NotFound from './views/NotFound';
 
 // components
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
-import DeckList from './components/DeckList';
-import CardList from './components/CardList';
+// import DeckList from './components/DeckList';
+// import CardList from './components/CardList';
 
 function App() {
 
@@ -32,35 +32,39 @@ function App() {
         <div className="grid-container">
           <Sidebar/>
           <div className="main">
-        <Navbar/>
-            <div className="container-fluid">
-              <Switch>
-                <Route path="/playing-cards/:vendor/:deck">
-                  <CardList/>
-                </Route>
-                <Route path="/playing-cards/:vendor">
-                  <DeckList/>
-                </Route>
-                <Route path="/playing-cards">
-                  <DeckList/>
-                </Route>
-                <Route path="/card-games/:vendor">
-                  <CardGames/>
-                </Route>
-                <Route path="/tarot-cards">
-                  <TarotCards/>
-                </Route>
-                <Route path="/auth">
-                  <Auth/>
-                </Route>
-                <Route exact path="/">
-                  <Home/>
-                </Route>
-                <Route>
-                  <NotFound/>
-                </Route>
-              </Switch>
-            </div>
+            <Navbar/>
+            <Switch>
+              <Route path="/playing-cards/:vendor/:deck">
+                <CardsView/>
+              </Route>
+              <Route path="/playing-cards/:vendor">
+                <DecksView category="playing-cards"/>
+              </Route>
+              <Route path="/playing-cards">
+                <DecksView category="playing-cards"/>
+              </Route>
+              <Route path="/card-games/:vendor/:deck">
+                <CardsView/>
+              </Route>
+              <Route path="/card-games/:vendor">
+                <DecksView category="card-games"/>
+              </Route>
+              <Route path="/card-games">
+                <DecksView category="card-games"/>
+              </Route>
+              <Route path="/tarot-cards">
+                <DecksView category="tarot-cards"/>
+              </Route>
+              <Route path="/auth">
+                <Auth/>
+              </Route>
+              <Route exact path="/">
+                <Home/>
+              </Route>
+              <Route>
+                <NotFound/>
+              </Route>
+            </Switch>
           </div>
         </div>
       </div>
