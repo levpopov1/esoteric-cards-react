@@ -1,3 +1,4 @@
+import { useMemo} from 'react';
 import { useSelector } from 'react-redux';
 import {useParams} from "react-router-dom";
 import { selectAllDecks } from '../redux/slices/decksSlice';
@@ -7,16 +8,15 @@ function DeckList() {
 
   const params = useParams();
 
-  let filter;
-
-  if(params.vendor){
-    filter = (state) => {
-      return state.decks.data.filter(deck => deck.vendor_slug === params.vendor);
+  const filter = useMemo(() => {
+    if(params.vendor){
+      return (state) => {
+        return state.decks.data.filter(deck => deck.vendor_slug === params.vendor);
+      }
     }
-  }
-  else{
-    filter = selectAllDecks;
-  }
+    return selectAllDecks;
+  }, [params]);
+
 
   const decks = useSelector(filter);
   const error = useSelector(state => state.decks.error);
