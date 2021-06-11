@@ -4,18 +4,28 @@ import {useParams} from "react-router-dom";
 import { selectAllDecks } from '../redux/slices/decksSlice';
 import Deck from './Deck';
 
-function DeckList() {
+function DeckList({category}) {
 
   const params = useParams();
 
   const filter = useMemo(() => {
-    if(params.vendor){
+    if(category && params.vendor){
+      return (state) => {
+        return state.decks.data.filter(deck => deck.category_slug === category && deck.vendor_slug === params.vendor);
+      }
+    }
+    else if(category && !params.vendor){
+      return (state) => {
+        return state.decks.data.filter(deck => deck.category_slug === category);
+      }
+    }
+    else if(params.vendor && !category){
       return (state) => {
         return state.decks.data.filter(deck => deck.vendor_slug === params.vendor);
       }
     }
     return selectAllDecks;
-  }, [params]);
+  }, [params, category]);
 
 
   const decks = useSelector(filter);
@@ -31,7 +41,7 @@ function DeckList() {
     sideEffects = <div>{error}</div>
   }
   else if(status === 'succeeded' && decks.length === 0){
-    sideEffects = <div className="text-center p-3">No decks from this vendor.</div>
+    sideEffects = <div className="text-center p-3">No decks found.</div>
   }
 
   return (
