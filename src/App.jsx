@@ -29,44 +29,46 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <div className="grid-container">
-          <Sidebar/>
-          <div className="main">
-            <Navbar/>
-            <Switch>
-              <Route path="/playing-cards/:vendor/:deck">
-                <CardsView/>
-              </Route>
-              <Route path="/playing-cards/:vendor">
-                <DecksView category="playing-cards"/>
-              </Route>
-              <Route path="/playing-cards">
-                <DecksView category="playing-cards"/>
-              </Route>
-              <Route path="/card-games/:vendor/:deck">
-                <CardsView/>
-              </Route>
-              <Route path="/card-games/:vendor">
-                <DecksView category="card-games"/>
-              </Route>
-              <Route path="/card-games">
-                <DecksView category="card-games"/>
-              </Route>
-              <Route path="/tarot-cards">
-                <DecksView category="tarot-cards"/>
-              </Route>
-              <Route path="/auth">
-                <Auth/>
-              </Route>
-              <Route exact path="/">
-                <Home/>
-              </Route>
-              <Route>
-                <NotFound/>
-              </Route>
-            </Switch>
+        <Switch>
+          <Route path="/auth">
+            <Auth/>
+          </Route>
+          <div className="grid-container">
+            <Sidebar/>
+            <div className="main">
+              <Navbar/>
+              <Switch>
+                <Route path="/playing-cards/:vendor/:deck">
+                  <CardsView/>
+                </Route>
+                <Route path="/playing-cards/:vendor">
+                  <DecksView category="playing-cards"/>
+                </Route>
+                <Route path="/playing-cards">
+                  <DecksView category="playing-cards"/>
+                </Route>
+                <Route path="/card-games/:vendor/:deck">
+                  <CardsView/>
+                </Route>
+                <Route path="/card-games/:vendor">
+                  <DecksView category="card-games"/>
+                </Route>
+                <Route path="/card-games">
+                  <DecksView category="card-games"/>
+                </Route>
+                <Route path="/tarot-cards">
+                  <DecksView category="tarot-cards"/>
+                </Route>
+                <Route exact path="/">
+                  <Home/>
+                </Route>
+                <Route>
+                  <NotFound/>
+                </Route>
+              </Switch>
+            </div>
           </div>
-        </div>
+        </Switch>
       </div>
     </Router>
   );

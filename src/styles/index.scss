@@ -27,7 +27,7 @@
   }
 }
 
-input{
+input#search{
   min-width: 300px !important;
 }
 
@@ -68,6 +68,7 @@ input{
 }
 
 #authScreen{
+  height: 100vh;
   // background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
   background: linear-gradient(-45deg, #ec2f4b, #f03073, #e94099, #d856bc, #bd6cd9, #9880ef, #6791fb, #009fff);
   background-size: 200% 200%;
