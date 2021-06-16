@@ -13,14 +13,16 @@ export default async function makeAPIRequest(endpoint, requestOptions = {}){
 
   try {
     const response = await fetch(API_URL + endpoint, requestOptions);
-    if(!response.ok){
-      throw new Error(`API request error. Status: ${response.status} - ${response.statusText}`);
-    }
     const data = await response.json();
-    return data;
+
+    if(!response.ok){
+      return {error: data.errors, data: null}
+      // throw new Error(`API request error. Status: ${response.status} - ${response.statusText}`);
+    }
+    return {error: null, data: data};
   } 
   catch (error) {
-    throw new Error(`API request error: ${error}`);
+    return {error: error, data: null}
   }
 
 }
