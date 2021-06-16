@@ -1,7 +1,10 @@
 import React, {useState, useRef} from 'react'
+import { useHistory } from 'react-router-dom';
 import makeAPIRequest from '../redux/makeAPIRequest';
 
 function Auth() {
+
+  const history = useHistory()
 
   const formRef = useRef(null);
   const emailInput = useRef(null);
@@ -9,7 +12,6 @@ function Auth() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const [errors, setErrors] = useState([]);
   const [emailErrorText, setEmailErrorText] = useState("Please provide a valid email.");
   const [passwordErrorText, setPasswordErrorText] = useState("Please provide a password.");
 
@@ -28,31 +30,25 @@ function Auth() {
 
     let response = await makeAPIRequest('/auth/login', requestOptions);
 
-    console.log(response);
-
     if(response.error){
-      // setErrors(response.error);
-      formRef.current.classList.remove('was-validated');
 
-      let emailError = response.error.filter(err => err.param === "email");
-      let passwordError = response.error.filter(err => err.param === "password");
+      let emailErrors = response.error.filter(err => err.param === "email");
+      let passwordErrors = response.error.filter(err => err.param === "password");
 
-      if(emailError.length > 0){
-        setEmailErrorText(emailError[0].msg);
-        emailInput.current.classList.add('is-invalid');
+      if(emailErrors.length > 0){
+        setEmailErrorText(emailErrors[0].msg);
+        applyEmailInvalidClass();
       }
       else{
-        emailInput.current.classList.remove('is-invalid');
-        emailInput.current.classList.add('is-valid');
+        applyEmailValidClass();
       }
 
-      if(passwordError.length > 0){
-        setPasswordErrorText(passwordError[0].msg);
-        passwordInput.current.classList.add('is-invalid');
+      if(passwordErrors.length > 0){
+        setPasswordErrorText(passwordErrors[0].msg);
+        applyPasswordInvalidClass();
       }
       else{
-        passwordInput.current.classList.remove('is-invalid');
-        passwordInput.current.classList.add('is-valid');
+        applyPasswordValidClass();
       }
 
       return false;
@@ -80,34 +76,68 @@ function Auth() {
   //   return response;
   // }
 
+  const isEmailValid = () => {
+    const rx = new RegExp(/^[\w-.]+@([\w-]+\.)+[\w-]{2,}$/g);
+    return Boolean(email.match(rx));
+  }
+
+  const isPasswordValid = () => {
+    return Boolean(password.length > 0);
+  }
+
+  const applyEmailValidClass = () => {
+    emailInput.current.classList.remove('is-invalid');
+    emailInput.current.classList.add('is-valid');
+  }
+
+  const applyEmailInvalidClass = () => {
+    emailInput.current.classList.remove('is-valid');
+    emailInput.current.classList.add('is-invalid');
+  }
+
+  const applyPasswordValidClass = () => {
+    passwordInput.current.classList.remove('is-invalid');
+    passwordInput.current.classList.add('is-valid');
+  }
+
+  const applyPasswordInvalidClass = () => {
+    passwordInput.current.classList.remove('is-valid');
+    passwordInput.current.classList.add('is-invalid');
+  }
+
+  const checkValidation = (e) => {
+    const emitter = e.target.id;
+
+    switch (emitter) {
+      case 'email':
+        isEmailValid() ? applyEmailValidClass() : applyEmailInvalidClass();
+        break;
+
+      case 'password':
+        isPasswordValid() ? applyPasswordValidClass() : applyPasswordInvalidClass();
+        break;
+
+      default:
+        break;
+    }
+  }
+
   const handleSubmit = async (e) => {
 
     e.preventDefault();
 
-    if(!e.target.checkValidity()){
-      console.log("cancelling api request")
-      e.stopPropagation();
-      formRef.current.classList.add('was-validated');
-      return false;
-    }
-
-    console.log("form submitted with", email, password)
+    // cancel submission if local validation fails
+    if(!isEmailValid() || !isPasswordValid()) return false;
+    
     const action = e.nativeEvent.submitter.id;
-
-
-    // if(!email){
-    //   console.log("please provide email")
-    // }
-
-    // if(!password){
-    //   console.log("please provide password")
-    // }
 
     switch (action) {
       case 'login':
         let data = await login();
-        if(!data){
-
+        if(data){
+          // set the cookie and token
+          // redirect to homepage
+          history.push('/');
         }
         break;
       case 'register':
@@ -118,7 +148,6 @@ function Auth() {
     }
 
   }
-
 
   return (
     <div id="authScreen">
@@ -131,10 +160,10 @@ function Auth() {
                 <h6 className="card-subtitle text-muted">Please sign in to continue</h6>
               </div>
               <div className="card-body">
-                <form className="needs-validation" onSubmit={handleSubmit} ref={formRef} noValidate>
+                <form className="needs-validation" onSubmit={handleSubmit} ref={formRef}>
                   <div className="mb-3">
                     <label htmlFor="email" className="form-label">Email address</label>
-                    <input type="email" className="form-control" id="email" value={email} ref={emailInput} onChange={e => setEmail(e.target.value)} aria-describedby="emailFeedback" required/>
+                    <input type="email" className="form-control" id="email" value={email} ref={emailInput} onChange={e => setEmail(e.target.value)} onBlur={e => checkValidation(e)} aria-describedby="emailFeedback" required/>
                     {/* <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div> */}
                     <div id="emailFeedback" className="invalid-feedback">
                       {emailErrorText}
@@ -142,7 +171,7 @@ function Auth() {
                   </div>
                   <div className="mb-5">
                     <label htmlFor="password" className="form-label">Password</label>
-                    <input type="password" className="form-control" id="password" value={password} ref={passwordInput} onChange={e => setPassword(e.target.value)} aria-describedby="passwordFeedback" required/>
+                    <input type="password" className="form-control" id="password" value={password} ref={passwordInput} onChange={e => setPassword(e.target.value)} onBlur={e => checkValidation(e)} aria-describedby="passwordFeedback" required/>
                     {/* <div id="passwordHelp" className="form-text">Please do not reuse passwords from other sites.</div> */}
                     <div id="passwordFeedback" className="invalid-feedback">
                       {passwordErrorText}
