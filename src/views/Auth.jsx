@@ -86,7 +86,14 @@ function Auth() {
   }
 
   const isPasswordValid = () => {
-    return Boolean(password.length > 0);
+    if(password.length === 0){
+      setPasswordErrorText("Please provide a password.");
+    }
+    else if(password.length > 0 && password.length < 16){
+      setPasswordErrorText("Password must be at least 16 characters long.");
+    }
+
+    return Boolean(password.length > 16);
   }
 
   const applyEmailValidClass = () => {
