@@ -1,6 +1,8 @@
 import React, {useState, useRef} from 'react'
 import { useHistory } from 'react-router-dom';
 import makeAPIRequest from '../redux/makeAPIRequest';
+import { useDispatch } from 'react-redux';
+import { setAccessToken, clearAccessToken } from '../redux/slices/userSlice';
 
 function Auth() {
 
@@ -15,6 +17,9 @@ function Auth() {
   const [emailErrorText, setEmailErrorText] = useState("Please provide a valid email.");
   const [passwordErrorText, setPasswordErrorText] = useState("Please provide a password.");
 
+  const dispatch = useDispatch();
+
+
   const login = async () => {
 
     setEmailErrorText("");
@@ -28,12 +33,13 @@ function Auth() {
       body: JSON.stringify({email, password})
     }
 
-    let response = await makeAPIRequest('/auth/login', requestOptions);
-
-    if(response.error){
-
-      let emailErrors = response.error.filter(err => err.param === "email");
-      let passwordErrors = response.error.filter(err => err.param === "password");
+    try {
+      let response = await makeAPIRequest('/auth/login', requestOptions);
+      return Promise.resolve(response.accessToken);
+    } 
+    catch (errors) {
+      let emailErrors = errors.filter(err => err.param === "email");
+      let passwordErrors = errors.filter(err => err.param === "password");
 
       if(emailErrors.length > 0){
         setEmailErrorText(emailErrors[0].msg);
@@ -51,10 +57,8 @@ function Auth() {
         applyPasswordValidClass();
       }
 
-      return false;
+      return Promise.reject("Validation errors found");
     }
-
-    return response.data;
   }
 
   // const register = async () => {
@@ -133,11 +137,13 @@ function Auth() {
 
     switch (action) {
       case 'login':
-        let data = await login();
-        if(data){
-          // set the cookie and token
-          // redirect to homepage
+        try {
+          let accessToken = await login();
+          dispatch(setAccessToken(accessToken));
           history.push('/');
+        } 
+        catch (error) {
+          dispatch(clearAccessToken());
         }
         break;
       case 'register':
