@@ -1,39 +1,23 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import makeAPIRequest from '../makeAPIRequest';
-
-// Async Thunks
-export const loginUser = createAsyncThunk('decks/fetchDecks', async (requestOptions) => makeAPIRequest("/login", requestOptions));
+import { createSlice } from '@reduxjs/toolkit';
 
 // Slice
 const userSlice = createSlice({
   name: 'user',
   initialState: {
-    error: null,
-    status: 'idle',
     accessToken: ""
   },
   reducers: {
-    // setRefreshToken: (state, action) => {
-    //   state.accessToken.push(action.payload);
-    // }
-  },
-  extraReducers: {
-    [loginUser.pending]: (state, action) => {
-      state.status = 'loading';
-    },
-    [loginUser.fulfilled]: (state, action) => {
-      state.status = 'succeeded';
+    setAccessToken: (state, action) => {
       state.accessToken = action.payload;
     },
-    [loginUser.rejected]: (state, action) => {
-      state.status = 'failed';
-      state.error = action.error.message;
+    clearAccessToken: (state, action) => {
+      state.accessToken = "";
     }
   }
 });
 
 // Actions
-// export const { addDeck, removeDeck } = userSlice.actions;
+export const { setAccessToken, clearAccessToken } = userSlice.actions;
 
 // Selectors
 export const selectAccessToken = (state) => state.user.accessToken;
