@@ -320,8 +320,6 @@ label.switch{
   // display: flex;
   // align-items: center;
   background-color: transparent;
-  width: 63mm;
-  height: 88mm;
   // border: 1px solid #f1f1f1;
   perspective: 1000px;
 
@@ -329,6 +327,16 @@ label.switch{
     box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
     cursor: pointer;
   }
+
+  &.playing-card{
+    width: 63mm;
+    height: 88mm;
+  }
+
+  // &.auth-card{
+  //   width: 400px;
+  //   height: 400px;
+  // }
 
 
   .flip-card-inner {
@@ -342,8 +350,6 @@ label.switch{
     border-radius: 8.5px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     transition: all 0.8s cubic-bezier(.25,.8,.25,1);
-  
-
   }
 
   &.active .flip-card-inner {
@@ -372,4 +378,34 @@ label.switch{
   &.v-offset{
     // margin-top: -3rem;
   }
+}
+
+
+.flippable-card{
+  // background-color: transparent;
+  perspective: 1000px;
+
+  &:hover .flip-card-inner{
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+  }
+
+  .flippable-card-inner{
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    transition: all 0.8s cubic-bezier(.25,.8,.25,1);
+  }
+
+  &.active .flippable-card-inner{
+    transform: rotateY(180deg);
+  }
+
+  .flippable-card-front, .flippable-card-back{
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+  }
+  
+  .flippable-card-back{
+    transform: rotateY(180deg);
+  }
+
 }
