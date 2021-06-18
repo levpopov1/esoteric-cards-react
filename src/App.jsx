@@ -30,7 +30,10 @@ function App() {
     <Router>
       <div className="App">
         <Switch>
-          <Route path="/auth">
+          <Route path="/auth/:action">
+            <Auth/>
+          </Route>
+          <Route exact path="/auth">
             <Auth/>
           </Route>
           <Route>
