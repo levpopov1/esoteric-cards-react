@@ -11,7 +11,7 @@ function Card({card, showCardBack}) {
   return (
     <div className="col my-3">
       <div className="playing-card-bounding-box">
-        <div className={`flip-card ${active ? "active" : ""}`} onClick={() => setActive(prev => !prev)}>
+        <div className={`flip-card playing-card ${active ? "active" : ""}`} onClick={() => setActive(prev => !prev)}>
           <div className="flip-card-inner">
             <div className="flip-card-front">
               <img src={"/img/placeholders/" + card.img} className="card-img-top" alt={card.name}/>
