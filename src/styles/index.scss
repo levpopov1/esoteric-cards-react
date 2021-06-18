@@ -297,8 +297,6 @@ input:checked + .slider:before {
 
 label.switch{
   margin-bottom: 0;
-  /* margin-bottom: 5px; */
-  /* float: right; */
   height: 24px;
 }
 
@@ -307,20 +305,13 @@ label.switch{
 }
 
 .playing-card-bounding-box{
-  // margin-top: 3rem;
-  // background-color: #009fff;
-  // border: none;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .flip-card{
-  // border: none;
-  // display: flex;
-  // align-items: center;
   background-color: transparent;
-  // border: 1px solid #f1f1f1;
   perspective: 1000px;
 
   &:hover .flip-card-inner{
@@ -332,12 +323,6 @@ label.switch{
     width: 63mm;
     height: 88mm;
   }
-
-  // &.auth-card{
-  //   width: 400px;
-  //   height: 400px;
-  // }
-
 
   .flip-card-inner {
     position: relative;
@@ -364,8 +349,6 @@ label.switch{
     backface-visibility: hidden;
 
     img{
-      // width: 63mm;
-      // height: 88mm;
       width: 100%;
       height: 100%;
     }
@@ -374,38 +357,4 @@ label.switch{
   .flip-card-back {
     transform: rotateY(180deg);
   }
-
-  &.v-offset{
-    // margin-top: -3rem;
-  }
-}
-
-
-.flippable-card{
-  // background-color: transparent;
-  perspective: 1000px;
-
-  &:hover .flip-card-inner{
-    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
-  }
-
-  .flippable-card-inner{
-    transition: transform 0.8s;
-    transform-style: preserve-3d;
-    transition: all 0.8s cubic-bezier(.25,.8,.25,1);
-  }
-
-  &.active .flippable-card-inner{
-    transform: rotateY(180deg);
-  }
-
-  .flippable-card-front, .flippable-card-back{
-    -webkit-backface-visibility: hidden; /* Safari */
-    backface-visibility: hidden;
-  }
-  
-  .flippable-card-back{
-    transform: rotateY(180deg);
-  }
-
 }
