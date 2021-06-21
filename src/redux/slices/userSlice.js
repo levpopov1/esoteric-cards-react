@@ -10,14 +10,20 @@ const userSlice = createSlice({
   initialState: {
     error: null,
     status: "idle",
-    accessToken: ""
+    id: null,
+    username: null,
+    accessToken: null
   },
   reducers: {
-    setAccessToken: (state, action) => {
-      state.accessToken = action.payload;
+    setUser: (state, action) => {
+      state.id = action.payload.id;
+      state.username = action.payload.username;
+      state.accessToken = action.payload.accessToken;
     },
-    clearAccessToken: (state, action) => {
-      state.accessToken = "";
+    clearUser: (state, action) => {
+      state.id = null;
+      state.username = null;
+      state.accessToken = null;
     }
   },
   extraReducers: {
@@ -36,7 +42,7 @@ const userSlice = createSlice({
 });
 
 // Actions
-export const { setAccessToken, clearAccessToken } = userSlice.actions;
+export const { setUser, clearUser } = userSlice.actions;
 
 // Selectors
 export const selectAccessToken = (state) => state.user.accessToken;
