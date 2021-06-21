@@ -46,6 +46,7 @@ export const { setUser, clearUser } = userSlice.actions;
 
 // Selectors
 export const selectAccessToken = (state) => state.user.accessToken;
+export const selectUser = (state) => ({ id: state.user.id, username: state.user.username, accessToken: state.user.accessToken });
 
 // Reducers
 export default userSlice.reducer;
