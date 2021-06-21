@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 
-function UserMenuDropdown() {
+function UserMenuDropdown({user}) {
   return (
     <li className="nav-item dropdown" id="user-icon">
       <button className="btn nav-link dropdown-toggle" id="userSettings" data-bs-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false" data-bs-auto-close="outside">
         <i className="bi bi-person-circle" id="usericon"></i>
-        <span className="label">user name</span>
+        <span className="label">{user?.username || "Guest"}</span>
       </button>
       <div id="userSettingsDropdown" className="dropdown-menu dropdown-menu-end" aria-labelledby="userSettings">
         <Link className="dropdown-item d-flex align-items-center" to="/users/id">

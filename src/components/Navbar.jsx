@@ -1,6 +1,12 @@
+import {useState} from 'react';
+import {useSelector} from 'react-redux';
+import { selectUser } from '../redux/slices/userSlice';
 import UserMenuDropdown from './UserMenuDropdown';
 
 function Navbar() {
+
+  const user = useSelector(selectUser);
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white">
       <div className="container-fluid">
@@ -40,7 +46,7 @@ function Navbar() {
                 <i className="bi bi-gear-fill"></i>
               </button>
             </li>
-            <UserMenuDropdown/>
+            <UserMenuDropdown user={user}/>
           </ul>
         </div>
       </div>
