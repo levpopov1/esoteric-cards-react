@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Switch, Route, Redirect, useHistory, useLocation } from 'react-router-dom';
-import { setAccessToken, clearAccessToken } from '../redux/slices/userSlice';
+import { setUser, clearUser } from '../redux/slices/userSlice';
 
 // API 
 import makeAPIRequest from '../lib/makeAPIRequest';
@@ -113,7 +113,7 @@ function Auth() {
 
     try {
       let response = await makeAPIRequest(endpoint, requestOptions);
-      return Promise.resolve(response.accessToken);
+      return Promise.resolve(response.user);
     } 
     catch (errors) {
       return Promise.reject(errors);
@@ -144,11 +144,11 @@ function Auth() {
         }
 
         try {
-          let accessToken = await login(email, password);
-          dispatch(setAccessToken(accessToken));
+          let user = await login(email, password);
+          dispatch(setUser(user));
         } 
         catch (errors) {
-          dispatch(clearAccessToken());
+          dispatch(clearUser());
           return Promise.reject(handleErrorPrompts(errors));
         }
         break;
@@ -159,11 +159,11 @@ function Auth() {
         }
 
         try {
-          let accessToken = await register(username, email, password);
-          dispatch(setAccessToken(accessToken));
+          let user = await register(username, email, password);
+          dispatch(setUser(user));
         } 
         catch (errors) {
-          dispatch(clearAccessToken());
+          dispatch(clearUser());
           return Promise.reject(handleErrorPrompts(errors));
         }
         break;
