@@ -61,21 +61,21 @@ function RegisterForm({checkValidation, handleSubmit, formValidationUI}) {
         <form id="register-form" onSubmit={(e) => handleOnSubmit(e)} ref={registerFormRef}>
           <div className="mb-3">
             <label htmlFor="username" className="form-label">Username</label>
-            <input type="text" className="form-control" id="username" value={username} ref={usernameInput} onChange={e => setUsername(e.target.value)} onBlur={e => checkValidation(e)} aria-describedby="usernameFeedback" required/>
+            <input type="text" className="form-control" id="username" value={username} ref={usernameInput} onChange={e => setUsername(e.target.value)} onBlur={e => checkValidation(e, username, usernameInput)} aria-describedby="usernameFeedback"/>
             <div id="usernameFeedback" className="invalid-feedback">
               {usernameErrorText}
             </div>
           </div>
           <div className="mb-3">
             <label htmlFor="email" className="form-label">Email address</label>
-            <input type="email" className="form-control" id="email" value={email} ref={emailInput} onChange={e => setEmail(e.target.value)} onBlur={e => checkValidation(e)} aria-describedby="emailFeedback" required/>
+            <input type="email" className="form-control" id="email" value={email} ref={emailInput} onChange={e => setEmail(e.target.value)} onBlur={e => checkValidation(e, email, emailInput)} aria-describedby="emailFeedback" required/>
             <div id="emailFeedback" className="invalid-feedback">
               {emailErrorText}
             </div>
           </div>
           <div className="mb-5">
             <label htmlFor="password" className="form-label">Password</label>
-            <input type="password" className="form-control" id="password" value={password} ref={passwordInput} onChange={e => setPassword(e.target.value)} onBlur={e => checkValidation(e)} aria-describedby="passwordFeedback" required/>
+            <input type="password" className="form-control" id="password" value={password} ref={passwordInput} onChange={e => setPassword(e.target.value)} onBlur={e => checkValidation(e, password, passwordInput)} aria-describedby="passwordFeedback" required/>
             <div id="passwordFeedback" className="invalid-feedback">
               {passwordErrorText}
             </div>
