@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Switch, Route, Redirect, useHistory } from 'react-router-dom';
+import { Switch, Route, Redirect, useHistory, useLocation } from 'react-router-dom';
 import { setAccessToken, clearAccessToken } from '../redux/slices/userSlice';
 
 // API 
@@ -59,8 +59,19 @@ const checkValidation = (e, value, ref) => {
 function Auth() {
 
   const [showRegisterForm, setShowRegisterForm] = useState(false);
+  const [justLoggedOut, setJustLoggedOut] = useState(false);
   const history = useHistory();
+  const location = useLocation()
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if(location.pathname === "/auth/logout"){
+      setShowRegisterForm(true);
+      setJustLoggedOut(true);
+      return;
+    }
+    setJustLoggedOut(false);
+  }, [location])
 
   const handleRedirect = () => {
     if(showRegisterForm){
@@ -186,15 +197,27 @@ function Auth() {
                   formValidationUI={formValidationUI}
                 />
               </Route>
+              <Route path="/auth/logout">
+                <p className="text-center text-white mb-5">You have logged out.</p>
+              </Route>
             </Switch>
-            <div className="d-grid gap-2 px-5 text-center text-white">
-              <p className="mb-3 mt-5">
-                {showRegisterForm ? "Already have an account?" : "Don't have an account?"}
-              </p>
-              <button id="register" className="btn btn-dark" onClick={handleRedirect}>
-                {showRegisterForm ? "Log in" : "Sign Up"}
-              </button>
-            </div>
+            {
+              justLoggedOut ? 
+              <div className="d-grid gap-2 px-5 text-center text-white">
+                <button id="redirect" className="btn btn-outline-dark" onClick={handleRedirect}>
+                  Log back in
+                </button>
+              </div>
+              :
+              <div className="d-grid gap-2 px-5 text-center text-white">
+                <p className="mb-3 mt-5">
+                  {showRegisterForm ? "Already have an account?" : "Don't have an account?"}
+                </p>
+                <button id="redirect" className="btn btn-dark" onClick={handleRedirect}>
+                  {showRegisterForm ? "Log in" : "Sign Up"}
+                </button>
+              </div>
+            }
           </div>
         </div>
       </div>
