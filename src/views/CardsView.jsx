@@ -1,10 +1,10 @@
-import Breadcrubs from '../components/Breadcrubs';
+import Breadcrumbs from '../components/Breadcrumbs';
 import CardList from '../components/CardList';
 
 function CardsView() {
   return (
     <div className="container-fluid">
-      <Breadcrubs/>
+      <Breadcrumbs/>
       <CardList/>
     </div>
   );
