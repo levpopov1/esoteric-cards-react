@@ -35,23 +35,29 @@ const formValidationUI = {
 const checkValidation = (e, value, ref) => {
   const emitter = e.target.id;
 
-  console.log(emitter);
+  let passedValidation = false;
 
   switch (emitter) {
     case 'email':
-      isEmailValid(value) ? formValidationUI.applyInputValidClass(ref) : formValidationUI.applyInputInvalidClass(ref);
+      passedValidation = isEmailValid(value);
       break;
-
     case 'password':
-      isPasswordValid(value) ? formValidationUI.applyInputValidClass(ref) : formValidationUI.applyInputInvalidClass(ref);
+      passedValidation = isPasswordValid(value);
       break;
-
     case 'username':
-      isUsernameValid(value) ? formValidationUI.applyInputValidClass(ref) : formValidationUI.applyInputInvalidClass(ref);
+      passedValidation = isUsernameValid(value);
       break;
     default:
       break;
   }
+
+  if(passedValidation){
+    formValidationUI.applyInputValidClass(ref);
+  }
+  else{
+    formValidationUI.applyInputInvalidClass(ref);
+  }
+
 }
 
 function Auth() {
@@ -64,12 +70,13 @@ function Auth() {
 
   useEffect(() => {
     if(location.pathname === "/auth/logout"){
+      dispatch(clearUser());
       setShowRegisterForm(true);
       setJustLoggedOut(true);
       return;
     }
     setJustLoggedOut(false);
-  }, [location])
+  }, [location, dispatch]);
 
   const handleRedirect = () => {
     if(showRegisterForm){
@@ -98,7 +105,6 @@ function Auth() {
     return sendRequest('/auth/register', body);
   }
 
-
   const sendRequest = async (endpoint, requestBody) => {
     try {
       let response = await API.post(endpoint, requestBody);
@@ -110,14 +116,12 @@ function Auth() {
     }
   }
 
-  
   const handleErrorPrompts = (errors) => {
     let usernameErrors = errors.filter(err => err.param === "username");
     let emailErrors = errors.filter(err => err.param === "email");
     let passwordErrors = errors.filter(err => err.param === "password");
     return {usernameErrors, emailErrors, passwordErrors}
   }
-
 
   const handleSubmit = async (e, data) => {
 
@@ -205,6 +209,9 @@ function Auth() {
                 </p>
                 <button id="redirect" className="btn btn-dark" onClick={handleRedirect}>
                   {showRegisterForm ? "Log in" : "Sign Up"}
+                </button>
+                <button id="gohome" className="btn btn-outline-dark" onClick={()=> history.push("/")}>
+                  Continue as Guest
                 </button>
               </div>
             }
