@@ -1,11 +1,20 @@
 import {useState} from 'react';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import { selectUser } from '../redux/slices/userSlice';
+import { fetchDecks } from '../redux/slices/decksSlice';
+import { fetchVendors } from '../redux/slices/vendorsSlice';
 import UserMenuDropdown from './UserMenuDropdown';
 
 function Navbar() {
 
   const user = useSelector(selectUser);
+
+  const dispatch = useDispatch();
+
+  const handleRefresh = () => {
+    dispatch(fetchVendors()); 
+    dispatch(fetchDecks()); 
+  }
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white">
@@ -32,7 +41,7 @@ function Navbar() {
               </button>
             </li>
             <li className="nav-item">
-              <button className="btn nav-link" title="Refresh">
+              <button className="btn nav-link" title="Refresh" onClick={handleRefresh}>
                 <i className="bi bi-arrow-repeat"></i>
               </button>
             </li>
