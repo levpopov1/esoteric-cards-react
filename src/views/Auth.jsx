@@ -2,9 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Switch, Route, Redirect, useHistory, useLocation } from 'react-router-dom';
 import { setUser, clearUser } from '../redux/slices/userSlice';
-
-// API 
-import makeAPIRequest from '../lib/makeAPIRequest';
+import API from '../lib/makeAPIRequest';
 
 // Form Components
 import LoginForm from '../components/LoginForm';
@@ -102,17 +100,9 @@ function Auth() {
 
 
   const sendRequest = async (endpoint, requestBody) => {
-
-    const requestOptions = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(requestBody)
-    }
-
     try {
-      let response = await makeAPIRequest(endpoint, requestOptions);
+      let response = await API.post(endpoint, requestBody);
+      console.log("dispatch response" , response);
       return Promise.resolve(response.user);
     } 
     catch (errors) {
