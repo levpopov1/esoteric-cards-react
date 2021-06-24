@@ -22,6 +22,7 @@ const userSlice = createSlice({
       state.id = null;
       state.username = null;
       state.accessToken = null;
+      API.clearToken();
     }
   }
 });
