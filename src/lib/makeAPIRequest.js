@@ -12,11 +12,16 @@ const setInstanceHeader = (headerName, headerValue) => {
   instance.defaults.headers.common[headerName] = headerValue;
 }
 
+const clearInstanceHeader = (headerName) => {
+  instance.defaults.headers.common[headerName] = null;
+}
+
 const handleReqeustError = (errors) => {
   return Promise.reject(errors);
 }
 
 const handleRequesSuccess = (response) => {
+  console.log(response)
   if(response.data.errors){
     return Promise.reject(response.data.errors);
   }
@@ -35,7 +40,9 @@ const API = {
   delete: (url) => 
     instance.delete(url).then(response => handleRequesSuccess(response)).catch(errors => handleReqeustError(errors)),
   setToken: (token) =>
-    setInstanceHeader('Authorization', `Bearer ${token}`)
+    setInstanceHeader('Authorization', `Bearer ${token}`),
+  clearToken: () =>
+    clearInstanceHeader('Authorization')
 }
 
 export default API;
