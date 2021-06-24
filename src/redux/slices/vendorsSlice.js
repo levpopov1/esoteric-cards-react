@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import makeAPIRequest from '../../lib/makeAPIRequest';
+import API from '../../lib/makeAPIRequest';
 
 // Async Thunks
-export const fetchVendors = createAsyncThunk('vendors/fetchVendors', async () => makeAPIRequest("/vendors"));
+export const fetchVendors = createAsyncThunk('vendors/fetchVendors', async () => API.get("/vendors"));
 
 // Slice
 const vendorsSlice = createSlice({
