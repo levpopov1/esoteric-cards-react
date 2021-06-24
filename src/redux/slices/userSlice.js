@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import API from '../../lib/makeAPIRequest';
+import API from '../../lib/API';
 
 // Slice
 const userSlice = createSlice({

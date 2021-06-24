@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Switch, Route, Redirect, useHistory, useLocation } from 'react-router-dom';
 import { setUser, clearUser } from '../redux/slices/userSlice';
-import API from '../lib/makeAPIRequest';
+import API from '../lib/API';
 
 // Form Components
 import LoginForm from '../components/LoginForm';
