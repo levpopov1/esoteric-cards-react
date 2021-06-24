@@ -1,8 +1,5 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import makeAPIRequest from '../../lib/makeAPIRequest';
-
-// Async Thunks
-export const loginUser = createAsyncThunk('user/loginUser', async (requestOptions) => makeAPIRequest("/decks", requestOptions));
+import { createSlice } from '@reduxjs/toolkit';
+import API from '../../lib/makeAPIRequest';
 
 // Slice
 const userSlice = createSlice({
@@ -19,24 +16,12 @@ const userSlice = createSlice({
       state.id = action.payload.id;
       state.username = action.payload.username;
       state.accessToken = action.payload.accessToken;
+      API.setToken(action.payload.accessToken);
     },
     clearUser: (state, action) => {
       state.id = null;
       state.username = null;
       state.accessToken = null;
-    }
-  },
-  extraReducers: {
-    [loginUser.pending]: (state, action) => {
-      state.status = 'loading';
-    },
-    [loginUser.fulfilled]: (state, action) => {
-      state.status = 'succeeded';
-      state.accessToken = action.payload;
-    },
-    [loginUser.rejected]: (state, action) => {
-      state.status = 'failed';
-      state.error = action.error.message;
     }
   }
 });
