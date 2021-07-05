@@ -43,6 +43,11 @@ export const selectAllDecks = (state) => state.decks.data;
 export const selectDeckById = (state, id) => state.decks.data.find(deck => deck.id === id);
 export const selectDeckByVendorName = (state, vendorName) => state.decks.data.filter(deck => deck.vendor === vendorName);
 export const selectDeckByCategoryName = (state, categoryName) => state.decks.data.filter(deck => deck.category === categoryName);
+export const selectRandomDeck = (state) => {
+  let rng = Math.floor(Math.random() * (state.decks.data.length - 1));
+  console.log("ramond : ", rng);
+  return state.decks.data[0];
+}
 
 // Reducers
 export default decksSlice.reducer;

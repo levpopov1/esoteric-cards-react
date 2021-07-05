@@ -15,6 +15,7 @@ import NotFound from './views/NotFound';
 // components
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
+import RandomDeck from './components/RandomDeck';
 // import DeckList from './components/DeckList';
 // import CardList from './components/CardList';
 
@@ -66,6 +67,9 @@ function App() {
                   </Route>
                   <Route path="/vendors">
                     <VendorsView/>
+                  </Route>
+                  <Route path="/random">
+                    <RandomDeck/>
                   </Route>
                   <Route exact path="/">
                     <Home/>

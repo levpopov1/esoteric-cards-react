@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import {useParams} from "react-router-dom";
 import Card from './Card';
 
-function CardList() {
+function CardList(props) {
 
   const params = useParams();
   const [currentDeck, setCurrentDeck] = useState({
@@ -22,21 +22,34 @@ function CardList() {
     }
   }, [storeDeck]);
 
-  let sideEffects;
+  useEffect(() => {
+    if(props.deck){
+      setCurrentDeck(props.deck);
+    }
+  }, [props.deck])
 
-  if(status === 'loading'){
-    sideEffects = <div className="loader text-center p-3">Loading...</div>
-  }
-  else if(status === 'failed'){
-    sideEffects = <div>{error}</div>
-  }
-  else if(status === 'succeeded' && storeDeck.cards.length === 0){
-    sideEffects = <div className="text-center p-3">No cards in this deck.</div>
+  const sideEffects = () => {
+    switch (status) {
+      case "loading":
+        return <div className="loader text-center p-3">Loading...</div>;
+      case "failed":
+        return <div>{error}</div>;
+      case "succeeded":
+        if(!storeDeck){
+          return <div className="text-center p-3">Deck not found.</div>
+        }
+        else if(storeDeck.cards.length === 0){
+          return <div className="text-center p-3">No cards in this deck.</div>
+        }
+        break;
+      default:
+        break;
+    }
   }
 
   return (
     <div className="row">
-      {sideEffects}
+      {sideEffects()}
       {
         status === 'succeeded' && currentDeck.name &&
         <div className="col-sm-12">
