@@ -4,13 +4,20 @@ import API from '../../lib/API';
 // Async Thunks
 export const fetchDecks = createAsyncThunk('decks/fetchDecks', async () => API.get("/decks"));
 
+const deckBlueprint = {
+  name: "",
+  vendor: "",
+  cards: []
+}
+
 // Slice
 const decksSlice = createSlice({
   name: 'decks',
   initialState: {
     error: null,
     status: 'idle',
-    data: []
+    data: [],
+    rng: 0
   },
   reducers: {
     addDeck: (state, action) => {
@@ -18,6 +25,9 @@ const decksSlice = createSlice({
     },
     removeDeck: (state, action) => {
       state.data.filter(deck => deck.id !== action.payload);
+    },
+    incrementRng: (state, action) => {
+      state.rng = action.payload;
     }
   },
   extraReducers: {
@@ -36,17 +46,19 @@ const decksSlice = createSlice({
 });
 
 // Actions
-export const { addDeck, removeDeck } = decksSlice.actions;
+export const { addDeck, removeDeck, incrementRng } = decksSlice.actions;
 
 // Selectors
 export const selectAllDecks = (state) => state.decks.data;
 export const selectDeckById = (state, id) => state.decks.data.find(deck => deck.id === id);
 export const selectDeckByVendorName = (state, vendorName) => state.decks.data.filter(deck => deck.vendor === vendorName);
 export const selectDeckByCategoryName = (state, categoryName) => state.decks.data.filter(deck => deck.category === categoryName);
+export const selectDeckByRouteParams = (state, params) => {
+  return state.decks.data.find(deck => deck.vendor_slug === params.vendor && deck.slug === params.deck) || deckBlueprint;
+}
 export const selectRandomDeck = (state) => {
   let rng = Math.floor(Math.random() * (state.decks.data.length - 1));
-  console.log("ramond : ", rng);
-  return state.decks.data[0];
+  return state.decks.data[rng] || deckBlueprint;
 }
 
 // Reducers
