@@ -8,6 +8,7 @@ import { fetchDecks } from './redux/slices/decksSlice';
 import Home from './views/Home';
 import DecksView from './views/DecksView';
 import CardsView from './views/CardsView';
+import VendorsView from './views/VendorsView';
 import Auth from './views/Auth';
 import NotFound from './views/NotFound';
 
@@ -62,6 +63,9 @@ function App() {
                   </Route>
                   <Route path="/tarot-cards">
                     <DecksView category="tarot-cards"/>
+                  </Route>
+                  <Route path="/vendors">
+                    <VendorsView/>
                   </Route>
                   <Route exact path="/">
                     <Home/>

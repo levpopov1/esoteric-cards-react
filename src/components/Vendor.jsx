@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Vendor({vendor}) {
   return (
@@ -7,7 +8,7 @@ function Vendor({vendor}) {
       <img src={vendor.img} className="card-img-top" alt=""/>
       <div className="card-body">
         <h5 className="card-title">
-          {vendor.name}
+          <Link to={`/vendors/${vendor.slug}`} className="strectched-link">{vendor.name}</Link>
         </h5>
       </div>
     </div>
