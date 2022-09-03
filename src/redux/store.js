@@ -7,8 +7,8 @@ const store = configureStore({
   reducer: {
     decks: decksReducer,
     vendors: vendorsReducer,
-    user: userReducer
-  }
+    user: userReducer,
+  },
 });
 
 export default store;

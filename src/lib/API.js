@@ -1,48 +1,61 @@
-import axios from "axios";
+import axios from 'axios';
 
-const instance = axios.create({
+const client = axios.create({
   baseURL: 'http://localhost:5000/api/v1',
   credentials: 'include',
   headers: {
-    'Content-Type': 'application/json'
-  }
+    'Content-Type': 'application/json',
+  },
 });
 
-const setInstanceHeader = (headerName, headerValue) => {
-  instance.defaults.headers.common[headerName] = headerValue;
-}
+const setHeader = (headerName, headerValue) => {
+  client.defaults.headers.common[headerName] = headerValue;
+};
 
-const clearInstanceHeader = (headerName) => {
-  instance.defaults.headers.common[headerName] = null;
-}
+const clearHeader = (headerName) => {
+  client.defaults.headers.common[headerName] = null;
+};
 
-const handleReqeustError = (errors) => {
+const handleRequestError = (errors) => {
   return Promise.reject(errors);
-}
+};
 
-const handleRequesSuccess = (response) => {
-  console.log(response)
-  if(response.data.errors){
+const handleRequestSuccess = (response) => {
+  console.log(response);
+  if (response.data.errors) {
     return Promise.reject(response.data.errors);
   }
   return Promise.resolve(response.data);
-}
+};
 
 const API = {
-  get: (url) => 
-    instance.get(url).then(response => handleRequesSuccess(response)).catch(errors => handleReqeustError(errors)),
-  post: (url, data) => 
-    instance.post(url, data).then(response => handleRequesSuccess(response)).catch(errors => handleReqeustError(errors)),
-  put: (url, data) => 
-    instance.put(url, data).then(response => handleRequesSuccess(response)).catch(errors => handleReqeustError(errors)),
-  patch: (url, data) => 
-    instance.patch(url, data).then(response => handleRequesSuccess(response)).catch(errors => handleReqeustError(errors)),
-  delete: (url) => 
-    instance.delete(url).then(response => handleRequesSuccess(response)).catch(errors => handleReqeustError(errors)),
-  setToken: (token) =>
-    setInstanceHeader('Authorization', `Bearer ${token}`),
-  clearToken: () =>
-    clearInstanceHeader('Authorization')
-}
+  get: (url) =>
+    client
+      .get(url)
+      .then((response) => handleRequestSuccess(response))
+      .catch((errors) => handleRequestError(errors)),
+  post: (url, data) =>
+    client
+      .post(url, data)
+      .then((response) => handleRequestSuccess(response))
+      .catch((errors) => handleRequestError(errors)),
+  put: (url, data) =>
+    client
+      .put(url, data)
+      .then((response) => handleRequestSuccess(response))
+      .catch((errors) => handleRequestError(errors)),
+  patch: (url, data) =>
+    client
+      .patch(url, data)
+      .then((response) => handleRequestSuccess(response))
+      .catch((errors) => handleRequestError(errors)),
+  delete: (url) =>
+    client
+      .delete(url)
+      .then((response) => handleRequestSuccess(response))
+      .catch((errors) => handleRequestError(errors)),
+  setToken: (token) => setHeader('Authorization', `Bearer ${token}`),
+  clearToken: () => clearHeader('Authorization'),
+};
 
 export default API;

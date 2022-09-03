@@ -1,25 +1,31 @@
-import {useState} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { selectUser } from '../redux/slices/userSlice';
 import { fetchDecks } from '../redux/slices/decksSlice';
 import { fetchVendors } from '../redux/slices/vendorsSlice';
 import UserMenuDropdown from './UserMenuDropdown';
 
 function Navbar() {
-
   const user = useSelector(selectUser);
 
   const dispatch = useDispatch();
 
   const handleRefresh = () => {
-    dispatch(fetchVendors()); 
-    dispatch(fetchDecks()); 
-  }
+    dispatch(fetchVendors());
+    dispatch(fetchDecks());
+  };
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white">
       <div className="container-fluid">
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarMain"
+          aria-controls="navbarMain"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarMain">
@@ -28,9 +34,9 @@ function Navbar() {
               <i className="bi bi-list"></i>
             </button>
             <div className="input-group" id="global-app-search">
-              <input className="form-control" type="text" id="search" placeholder="Search..."/>
+              <input className="form-control" type="text" id="search" placeholder="Search..." />
               <button className="btn btn-outline" type="button" id="button-addon2">
-                  <i className="bi bi-search"></i>
+                <i className="bi bi-search"></i>
               </button>
             </div>
           </div>
@@ -55,7 +61,7 @@ function Navbar() {
                 <i className="bi bi-gear-fill"></i>
               </button>
             </li>
-            <UserMenuDropdown user={user}/>
+            <UserMenuDropdown user={user} />
           </ul>
         </div>
       </div>

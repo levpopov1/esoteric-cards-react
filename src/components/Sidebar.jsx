@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
 function Sidebar() {
@@ -10,9 +10,7 @@ function Sidebar() {
           <span className="label ms-2">Esoteric</span>
         </Link>
         <ul className="nav flex-column">
-          <p className="sidebar-navblock-header">
-            Categories
-          </p>
+          <p className="sidebar-navblock-header">Categories</p>
           <li className="nav-item">
             <NavLink className="nav-link d-flex align-items-center" to="/playing-cards">
               <i className="bi bi-grid-fill"></i>
@@ -35,11 +33,9 @@ function Sidebar() {
             </NavLink>
           </li>
         </ul>
-        <hr/>
+        <hr />
         <ul className="nav flex-column">
-          <p className="sidebar-navblock-header">
-            Categories
-          </p>
+          <p className="sidebar-navblock-header">Categories</p>
           <li className="nav-item">
             <NavLink className="nav-link d-flex align-items-center" to="/featured">
               <i className="bi bi-grid-fill"></i>
@@ -83,11 +79,9 @@ function Sidebar() {
             </NavLink>
           </li>
         </ul>
-        <hr/>
+        <hr />
         <ul className="nav flex-column">
-          <p className="sidebar-navblock-header">
-            Section Header
-          </p>
+          <p className="sidebar-navblock-header">Section Header</p>
           <li className="nav-item">
             <a className="nav-link d-flex align-items-center" href="/" target="_blank">
               <i className="bi bi-grid-fill"></i>
@@ -133,7 +127,7 @@ function Sidebar() {
         </ul>
       </div>
     </nav>
-  )
+  );
 }
 
 export default Sidebar;

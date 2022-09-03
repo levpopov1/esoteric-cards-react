@@ -1,11 +1,11 @@
 import Breadcrumbs from '../components/Breadcrumbs';
 import DeckList from '../components/DeckList';
 
-function DecksView({category}) {
+function DecksView({ category }) {
   return (
     <div className="container-fluid">
-      <Breadcrumbs/>
-      <DeckList category={category}/>
+      <Breadcrumbs />
+      <DeckList category={category} />
     </div>
   );
 }

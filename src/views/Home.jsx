@@ -20,14 +20,13 @@ function Home() {
   //   content = <div className="loader">Loading...</div>
   // }
   // else if(deckStatus === 'succeeded'){
-  //   content = decks.map(item => 
+  //   content = decks.map(item =>
   //     <p key={item._id}>{item.name}</p>
   //   );
   // }
   // else if(deckStatus === 'failed'){
   //   content = <div>{errorMessage}</div>
   // }
-
 
   return (
     <div className="main">

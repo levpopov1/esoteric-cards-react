@@ -1,14 +1,24 @@
 import { Link } from 'react-router-dom';
 
-function UserMenuDropdown({user}) {
+function UserMenuDropdown({ user }) {
   return (
     <li className="nav-item dropdown" id="user-icon">
-      <button className="btn nav-link dropdown-toggle" id="userSettings" data-bs-toggle="dropdown"
-        aria-haspopup="true" aria-expanded="false" data-bs-auto-close="outside">
+      <button
+        className="btn nav-link dropdown-toggle"
+        id="userSettings"
+        data-bs-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+        data-bs-auto-close="outside"
+      >
         <i className="bi bi-person-circle" id="usericon"></i>
-        <span className="label">{user?.username || "Guest"}</span>
+        <span className="label">{user?.username || 'Guest'}</span>
       </button>
-      <div id="userSettingsDropdown" className="dropdown-menu dropdown-menu-end" aria-labelledby="userSettings">
+      <div
+        id="userSettingsDropdown"
+        className="dropdown-menu dropdown-menu-end"
+        aria-labelledby="userSettings"
+      >
         <Link className="dropdown-item d-flex align-items-center" to="/users/id">
           <i className="bi bi-person-badge-fill"></i>
           <span className="label">View Profile</span>
@@ -27,7 +37,11 @@ function UserMenuDropdown({user}) {
           <i className="bi bi-book-half"></i>
           <span className="label">Dev Blog</span>
         </Link>
-        <Link className="dropdown-item d-flex align-items-center" to="/release-schedule" target="_blank">
+        <Link
+          className="dropdown-item d-flex align-items-center"
+          to="/release-schedule"
+          target="_blank"
+        >
           <i className="bi bi-github"></i>
           <span className="label">Release Schedule</span>
           <i className="bi bi-box-arrow-up-right ms-auto"></i>
@@ -45,7 +59,7 @@ function UserMenuDropdown({user}) {
             <i className="bi bi-moon-fill"></i>
             <span className="label">Dark Mode</span>
             <label className="switch ms-auto">
-              <input type="checkbox"/>
+              <input type="checkbox" />
               <span className="slider round"></span>
             </label>
           </div>
@@ -53,7 +67,7 @@ function UserMenuDropdown({user}) {
             <i className="bi bi-link-45deg"></i>
             <span className="label">Some other toggle</span>
             <label className="switch ms-auto">
-              <input type="checkbox"/>
+              <input type="checkbox" />
               <span className="slider round"></span>
             </label>
           </div>
@@ -61,7 +75,7 @@ function UserMenuDropdown({user}) {
             <i className="bi bi-link-45deg"></i>
             <span className="label">some other toggle</span>
             <label className="switch ms-auto">
-              <input type="checkbox"/>
+              <input type="checkbox" />
               <span className="slider round"></span>
             </label>
           </div>
@@ -69,7 +83,7 @@ function UserMenuDropdown({user}) {
             <i className="bi bi-link-45deg"></i>
             <span className="label">some other toggle</span>
             <label className="switch ms-auto">
-              <input type="checkbox"/>
+              <input type="checkbox" />
               <span className="slider round"></span>
             </label>
           </div>
@@ -81,7 +95,7 @@ function UserMenuDropdown({user}) {
         </Link>
       </div>
     </li>
-  )
+  );
 }
 
 export default UserMenuDropdown;
