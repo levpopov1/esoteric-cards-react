@@ -10,10 +10,10 @@ function CardsView() {
   const currentDeck = useSelector((state) => selectDeckByRouteParams(state, params));
 
   return (
-    <div className="container-fluid">
+    <>
       <Breadcrumbs />
       <CardList currentDeck={currentDeck} />
-    </div>
+    </>
   );
 }
 
