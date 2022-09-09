@@ -4,7 +4,7 @@ import Login from '../views/Login';
 import SignUp from '../views/SignUp';
 import Logout from '../views/Logout';
 
-function Auth() {
+function Security() {
   return (
     <Routes>
       <Route path="login" element={<Login />} />
@@ -15,4 +15,4 @@ function Auth() {
   );
 }
 
-export default Auth;
+export default Security;

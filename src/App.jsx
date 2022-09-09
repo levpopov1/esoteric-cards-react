@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 // Pages
-import Auth from './pages/Auth';
+import Security from './pages/Security';
 import Home from './pages/Home';
 import PlayingCards from './pages/PlayingCards';
 import CardGames from './pages/CardGames';
@@ -11,7 +11,7 @@ import Vendors from './pages/Vendors';
 // Views
 import Main from './views/Main';
 import NotFound from './views/NotFound';
-import AuthView from './views/Authview';
+import Auth from './views/Auth';
 
 // components
 import RandomDeck from './components/RandomDeck';
@@ -21,8 +21,8 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
-          <Route path="/auth/*" element={<AuthView />}>
-            <Route path="*" element={<Auth />} />
+          <Route path="/auth/*" element={<Auth />}>
+            <Route path="*" element={<Security />} />
           </Route>
           <Route path="/" element={<Main />}>
             <Route index element={<Home />} />
