@@ -1,98 +1,71 @@
-import { useState, useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { loginFormSchema } from '../validationSchema/schema';
+import { login } from '../redux/slices/userSlice';
 
-function LoginForm({ checkValidation, handleSubmit, formValidationUI }) {
-  const loginFormRef = useRef(null);
-  const emailInput = useRef(null);
-  const passwordInput = useRef(null);
-
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [emailErrorText, setEmailErrorText] = useState('Please provide a valid email.');
-  const [passwordErrorText, setPasswordErrorText] = useState('Please provide a password.');
-
-  const handleOnSubmit = async (e) => {
-    try {
-      const callback = await handleSubmit(e, { email, password });
-      callback();
-    } catch (errors) {
-      if (!errors) return;
-
-      const { emailErrors, passwordErrors } = errors;
-
-      if (emailErrors.length > 0) {
-        setEmailErrorText(emailErrors[0].msg);
-        formValidationUI.applyInputInvalidClass(emailInput);
-      } else {
-        formValidationUI.applyInputValidClass(emailInput);
-      }
-
-      if (passwordErrors.length > 0) {
-        setPasswordErrorText(passwordErrors[0].msg);
-        formValidationUI.applyInputInvalidClass(passwordInput);
-      } else {
-        formValidationUI.applyInputValidClass(passwordInput);
-      }
-    }
-  };
+function LoginForm() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   return (
-    <div className="card p-4">
-      <div className="card-body text-center">
-        {/* <h2 className="card-title mb-3">Welcome to Esoteric</h2> */}
-        <h6 className="card-subtitle text-muted">Please sign in to continue</h6>
-      </div>
-      <div className="card-body">
-        <form id="login-form" onSubmit={(e) => handleOnSubmit(e)} ref={loginFormRef}>
+    <Formik
+      initialValues={{ email: '', password: '' }}
+      validationSchema={loginFormSchema}
+      onSubmit={async (values, { setSubmitting }) => {
+        console.log('form on submit', values);
+        const response = await dispatch(login(values));
+        setSubmitting(false);
+        if (response.error) {
+          console.log('ERROR', response.error.message);
+          return;
+        }
+        if (response.payload.user.id) {
+          navigate('/');
+        }
+      }}
+    >
+      {({ isSubmitting }) => (
+        <Form id="login-form">
           <div className="mb-3">
             <label htmlFor="email" className="form-label">
-              Email address
+              Email
             </label>
-            <input
+            <Field
               type="email"
+              name="email"
+              id="email-input"
               className="form-control"
-              id="email"
-              value={email}
-              ref={emailInput}
-              onChange={(e) => setEmail(e.target.value)}
-              onBlur={(e) => checkValidation(e, email, emailInput)}
               aria-describedby="emailFeedback"
-              required
             />
-            {/* <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div> */}
-            <div id="emailFeedback" className="invalid-feedback">
-              {emailErrorText}
-            </div>
+            <ErrorMessage name="email" component="div" className="invalid-feedback" />
           </div>
           <div className="mb-5">
             <label htmlFor="password" className="form-label">
               Password
             </label>
-            <input
+            <Field
               type="password"
+              name="password"
+              id="password-input"
               className="form-control"
-              id="password"
-              value={password}
-              ref={passwordInput}
-              onChange={(e) => setPassword(e.target.value)}
-              onBlur={(e) => checkValidation(e, password, passwordInput)}
               aria-describedby="passwordFeedback"
-              required
             />
-            {/* <div id="passwordHelp" className="form-text">Please do not reuse passwords from other sites.</div> */}
-            <div id="passwordFeedback" className="invalid-feedback">
-              {passwordErrorText}
-            </div>
+            <ErrorMessage name="password" component="div" className="invalid-feedback" />
           </div>
           <div className="d-grid gap-2 text-center">
-            <button type="submit" id="login" className="btn btn-primary">
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              id="login-button"
+              className="btn btn-primary"
+            >
               Log in
             </button>
-            {/* <p className="m-0">&mdash; or &mdash;</p>
-            <button type="submit" id="register" className="btn btn-outline-dark" onClick={() => setShowRegisterForm(prev => !prev)}>Create account</button> */}
           </div>
-        </form>
-      </div>
-    </div>
+        </Form>
+      )}
+    </Formik>
   );
 }
 

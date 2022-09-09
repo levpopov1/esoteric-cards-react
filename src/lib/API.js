@@ -17,7 +17,11 @@ const clearHeader = (headerName) => {
 };
 
 const handleRequestError = (errors) => {
-  return Promise.reject(errors);
+  return Promise.reject({
+    code: errors.response.status,
+    message: errors.response.data.errors[0].msg,
+    statusText: errors.response.statusText,
+  });
 };
 
 const handleRequestSuccess = (response) => {

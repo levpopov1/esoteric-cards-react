@@ -1,6 +1,13 @@
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { clearUser } from '../redux/slices/userSlice';
 
 function UserMenuDropdown({ user }) {
+  const dispatch = useDispatch();
+  const logout = () => {
+    dispatch(clearUser());
+  };
+
   return (
     <li className="nav-item dropdown" id="user-icon">
       <button
@@ -89,7 +96,11 @@ function UserMenuDropdown({ user }) {
           </div>
         </form>
         <div className="dropdown-divider"></div>
-        <Link className="dropdown-item d-flex align-items-center" to="/auth/logout">
+        <Link
+          className="dropdown-item d-flex align-items-center"
+          to="/auth/logout"
+          onClick={logout}
+        >
           <i className="bi bi-door-open-fill"></i>
           <span className="label">Log out</span>
         </Link>
