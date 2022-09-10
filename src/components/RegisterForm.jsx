@@ -1,23 +1,24 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { registerFormSchema } from '../validationSchema/schema';
-import { register } from '../redux/slices/userSlice';
+import { register, selectUserStatus } from '../redux/slices/userSlice';
+import ButtonLoadingSpinner from './ButtonLoadingSpinner';
+import NetworkError from './NetworkError';
 
 function RegisterForm() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { error, status } = useSelector(selectUserStatus);
 
   return (
     <Formik
       initialValues={{ username: '', email: '', password: '' }}
       validationSchema={registerFormSchema}
-      onSubmit={async (values, { setSubmitting }) => {
-        console.log('form on submit', values);
-        const response = await dispatch(register(values));
-        console.log(response);
-        setSubmitting(false);
-        if (response.payload.user.id) {
+      onSubmit={async (values, actions) => {
+        const { error, payload } = await dispatch(register(values));
+        actions.setSubmitting(false);
+        if (!error && payload) {
           navigate('/');
         }
       }}
@@ -69,10 +70,13 @@ function RegisterForm() {
               disabled={isSubmitting}
               id="register-button"
               className="btn btn-primary"
+              style={{ position: 'relative' }}
             >
+              {status === 'loading' && <ButtonLoadingSpinner />}
               Create Account
             </button>
           </div>
+          {error && status === 'failed' && <NetworkError error={error} />}
         </Form>
       )}
     </Formik>

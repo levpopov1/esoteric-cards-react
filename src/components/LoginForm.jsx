@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { loginFormSchema } from '../validationSchema/schema';
 import { login, selectUserStatus } from '../redux/slices/userSlice';
+import ButtonLoadingSpinner from './ButtonLoadingSpinner';
+import NetworkError from './NetworkError';
 
 function LoginForm() {
   const dispatch = useDispatch();
@@ -57,25 +59,11 @@ function LoginForm() {
               className="btn btn-primary"
               style={{ position: 'relative' }}
             >
-              {status === 'loading' && (
-                <>
-                  <span
-                    className="spinner-border spinner-border-sm"
-                    role="status"
-                    style={{ position: 'absolute', left: '10px', top: '10px' }}
-                    aria-hidden="true"
-                  ></span>
-                  <span className="visually-hidden">Loading...</span>
-                </>
-              )}
+              {status === 'loading' && <ButtonLoadingSpinner />}
               Log in
             </button>
           </div>
-          {error && status === 'failed' && (
-            <div className="mt-3">
-              <div className="invalid-feedback text-center fw-bold">Error: {error}</div>
-            </div>
-          )}
+          {error && status === 'failed' && <NetworkError error={error} />}
         </Form>
       )}
     </Formik>
