@@ -74,6 +74,10 @@ export const selectUser = (state) => ({
   username: state.user.username,
   accessToken: state.user.accessToken,
 });
+export const selectUserStatus = (state) => ({
+  error: state.user.error,
+  status: state.user.status,
+});
 
 // Reducers
 export default userSlice.reducer;

@@ -1,26 +1,22 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { loginFormSchema } from '../validationSchema/schema';
-import { login } from '../redux/slices/userSlice';
+import { login, selectUserStatus } from '../redux/slices/userSlice';
 
 function LoginForm() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { error, status } = useSelector(selectUserStatus);
 
   return (
     <Formik
       initialValues={{ email: '', password: '' }}
       validationSchema={loginFormSchema}
-      onSubmit={async (values, { setSubmitting }) => {
-        console.log('form on submit', values);
-        const response = await dispatch(login(values));
-        setSubmitting(false);
-        if (response.error) {
-          console.log('ERROR', response.error.message);
-          return;
-        }
-        if (response.payload.user.id) {
+      onSubmit={async (values, actions) => {
+        const { error, payload } = await dispatch(login(values));
+        actions.setSubmitting(false);
+        if (!error && payload) {
           navigate('/');
         }
       }}
@@ -59,10 +55,27 @@ function LoginForm() {
               disabled={isSubmitting}
               id="login-button"
               className="btn btn-primary"
+              style={{ position: 'relative' }}
             >
+              {status === 'loading' && (
+                <>
+                  <span
+                    className="spinner-border spinner-border-sm"
+                    role="status"
+                    style={{ position: 'absolute', left: '10px', top: '10px' }}
+                    aria-hidden="true"
+                  ></span>
+                  <span className="visually-hidden">Loading...</span>
+                </>
+              )}
               Log in
             </button>
           </div>
+          {error && status === 'failed' && (
+            <div className="mt-3">
+              <div className="invalid-feedback text-center fw-bold">Error: {error}</div>
+            </div>
+          )}
         </Form>
       )}
     </Formik>
