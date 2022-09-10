@@ -16,11 +16,12 @@ function Login() {
       </div>
       <div className="d-grid gap-2 px-5 text-center text-white">
         <p className="mb-3 mt-5">Don&apos;t have an account?</p>
-        <button id="redirect" className="btn btn-dark" onClick={() => navigate('/auth/signup')}>
+        <button
+          id="redirect"
+          className="btn btn-outline-dark"
+          onClick={() => navigate('/auth/signup')}
+        >
           Sign Up
-        </button>
-        <button id="gohome" className="btn btn-outline-dark" onClick={() => navigate('/')}>
-          Continue as Guest
         </button>
       </div>
     </>

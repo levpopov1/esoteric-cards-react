@@ -6,7 +6,6 @@ import UserMenuDropdown from './UserMenuDropdown';
 
 function Navbar() {
   const user = useSelector(selectUser);
-
   const dispatch = useDispatch();
 
   const handleRefresh = () => {

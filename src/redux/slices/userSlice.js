@@ -10,6 +10,27 @@ export const login = createAsyncThunk('auth/login', async (requestBody) =>
   API.post('/auth/login', requestBody)
 );
 
+// local helpers
+const persistToLocalStorage = (items) => {
+  for (let key in items) {
+    localStorage.setItem(key, items[key]);
+  }
+};
+
+export const getUserFromLocalStorage = () => {
+  return {
+    id: localStorage.getItem('id'),
+    username: localStorage.getItem('username'),
+    accessToken: localStorage.getItem('accessToken'),
+  };
+};
+
+const clearUserFromLocalStorage = () => {
+  localStorage.removeItem('id');
+  localStorage.removeItem('username');
+  localStorage.removeItem('accessToken');
+};
+
 // Slice
 const userSlice = createSlice({
   name: 'user',
@@ -26,6 +47,7 @@ const userSlice = createSlice({
       state.username = null;
       state.accessToken = null;
       API.clearToken();
+      clearUserFromLocalStorage();
     },
   },
   extraReducers: {
@@ -39,7 +61,7 @@ const userSlice = createSlice({
       state.username = action.payload.user.username;
       state.accessToken = action.payload.user.accessToken;
       API.setToken(action.payload.accessToken);
-      // handle user persistance to local storage here
+      persistToLocalStorage(action.payload.user);
     },
     [register.rejected]: (state, action) => {
       state.status = 'failed';
@@ -55,7 +77,7 @@ const userSlice = createSlice({
       state.username = action.payload.user.username;
       state.accessToken = action.payload.user.accessToken;
       API.setToken(action.payload.accessToken);
-      // handle user persistance to local storage here
+      persistToLocalStorage(action.payload.user);
     },
     [login.rejected]: (state, action) => {
       state.status = 'failed';
